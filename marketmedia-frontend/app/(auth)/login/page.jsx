@@ -2,17 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-
-  useEffect(() => {
-    const token =
-      typeof localStorage !== "undefined"
-        ? localStorage.getItem("token")
-        : null;
-    console.log(token);
-  }, []);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +35,11 @@ const page = () => {
         },
       })
       .then((response) => {
-        console.log("Registration successful", response);
         // Perform success logic here
+        if (response.data.token) {
+          localStorage.setItem("token", JSON.stringify(response.data.token));
+          router.push("/");
+        }
       })
       .catch((error) => {
         console.error("Registration failed:", error);

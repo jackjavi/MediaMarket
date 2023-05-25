@@ -19,10 +19,7 @@ const page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Perform registration logic here
-    localStorage.removeItem("token");
-    setTimeout(() => {
-      console.log("Delayed for 3 second.");
-    }, 3000);
+
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/auth/register",
