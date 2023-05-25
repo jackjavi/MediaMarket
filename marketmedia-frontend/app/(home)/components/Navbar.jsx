@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-scroll";
+import Link from "next/link";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
@@ -30,7 +30,7 @@ const NavBar = () => {
     <div className=" flex z-10 justify-between items-center w-full h-[15vh] px-4 text-gray-700 bg-gray-200 fixed">
       <div>
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer">
-          <Link to="home" smooth duration={500}>
+          <Link href="/" smooth duration={500}>
             MEDIA MARKET
           </Link>
         </h1>
@@ -42,19 +42,21 @@ const NavBar = () => {
             key={id}
             className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
           >
-            <Link to={link} smooth duration={500}>
-              {link}
-            </Link>
+            {link}
           </li>
         ))}
       </ul>
       <ul className="hidden md:flex items-center">
-        <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-          login
-        </li>
-        <li className="p-2 rounded-md bg-[whitesmoke] cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-          Sign Up
-        </li>
+        <Link href="/login">
+          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            login
+          </li>
+        </Link>
+        <Link href="register">
+          <li className="p-2 rounded-md bg-[whitesmoke] cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            Sign Up
+          </li>
+        </Link>
       </ul>
 
       <div
@@ -71,14 +73,15 @@ const NavBar = () => {
               key={id}
               className="px-4 cursor-pointer capitalize py-6 text-2xl sm:text-3xl md:text-4xl shadow-md  w-full"
             >
-              <Link
+              {/*<Link
                 onClick={() => setNav(!nav)}
-                to={link}
+                href={link}
                 smooth
                 duration={500}
               >
                 {link}
-              </Link>
+          </Link>*/}{" "}
+              {link}
             </li>
           ))}
         </ul>

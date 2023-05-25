@@ -3,30 +3,44 @@
 import React, { useState } from "react";
 
 const page = () => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials,
+    setUser((prevUser) => ({
+      ...prevUser,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform login logic here
-    console.log("Login submitted:", credentials.email, credentials.password);
+    // Perform registration logic here
+    console.log("Registration submitted:", user);
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <form
-        className="w-full h-full shadow rounded flex items-center justify-center"
+        className="w-full h-full p-4 shadow text-gray-500 rounded flex items-center justify-center"
         onSubmit={handleSubmit}
       >
         <div className="md:w-[40vw] w-[100vw] flex flex-col items-center ">
-          <h2 className="text-xl font-bold mb-4">Login</h2>
+          <h2 className="text-xl text-[whitesmoke] font-bold mb-4">Register</h2>
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full border border-gray-300 rounded px-2 py-1"
+              value={user.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700">
               Email
@@ -36,7 +50,7 @@ const page = () => {
               id="email"
               name="email"
               className="w-full border border-gray-300 rounded px-2 py-1"
-              value={credentials.email}
+              value={user.email}
               onChange={handleChange}
               required
             />
@@ -50,16 +64,16 @@ const page = () => {
               id="password"
               name="password"
               className="w-full border border-gray-300 rounded px-2 py-1"
-              value={credentials.password}
+              value={user.password}
               onChange={handleChange}
               required
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 "
           >
-            Log in
+            Register
           </button>
         </div>
       </form>
