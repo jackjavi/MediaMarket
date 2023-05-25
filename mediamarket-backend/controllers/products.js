@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllProducts = async (req, res) => {
+  console.log(req.user.userId);
   const products = await Product.find({ createdBy: req.user.userId }).sort(
     "createdAt"
   );
