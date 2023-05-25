@@ -18,6 +18,7 @@ const port = process.env.port || 8000;
 
 // routers
 const authRouter = require("./routes/auth");
+const productsRouter = require("./routes/products");
 
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
@@ -38,6 +39,7 @@ app.use(xss());
 
 // routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/products", authenticateUser, productsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
