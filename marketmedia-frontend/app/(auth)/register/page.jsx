@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,11 +19,23 @@ const page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Perform registration logic here
-    const res = await axios.post(
-      "http://localhost:8000/api/v1/auth/register",
-      user
-    );
-    console.log(res.data);
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      console.log("Delayed for 3 second.");
+    }, 3000);
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/auth/register",
+        user
+      );
+
+      if (res.data.token) {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        router.push("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
