@@ -41,7 +41,7 @@ const page = () => {
         },
       })
       .then((response) => {
-        console.log("Registration successful");
+        console.log("Registration successful", response);
         // Perform success logic here
       })
       .catch((error) => {
