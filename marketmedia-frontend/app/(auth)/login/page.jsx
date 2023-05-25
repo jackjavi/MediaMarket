@@ -32,7 +32,7 @@ const page = () => {
 
     // Perform login logic here
     const token = localStorage.getItem("token");
-    const url = "http://localhost:8000/api/v1/auth/register";
+    const url = "http://localhost:8000/api/v1/auth/login";
 
     axios
       .post(url, credentials, {
