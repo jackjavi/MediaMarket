@@ -1,9 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const page = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  useEffect(() => {
+    const token =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem("token")
+        : null;
+    console.log(token);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,8 +24,30 @@ const page = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (credentials.password.length < 6) {
+      alert("Password should be at least 6 characters long");
+      return;
+    }
+
     // Perform login logic here
-    console.log("Login submitted:", credentials.email, credentials.password);
+    const token = localStorage.getItem("token");
+    const url = "http://localhost:8000/api/v1/auth/register";
+
+    axios
+      .post(url, credentials, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("Registration successful");
+        // Perform success logic here
+      })
+      .catch((error) => {
+        console.error("Registration failed:", error);
+        // Perform error logic here
+      });
   };
 
   return (
@@ -25,8 +56,8 @@ const page = () => {
         className="w-full h-full shadow rounded flex items-center justify-center"
         onSubmit={handleSubmit}
       >
-        <div className="md:w-[40vw] w-[100vw] flex flex-col items-center ">
-          <h2 className="text-xl font-bold mb-4">Login</h2>
+        <div className="md:w-[40vw] w-[100vw] text-gray-500 flex flex-col items-center ">
+          <h2 className="text-xl text-[whitesmoke] font-bold mb-4">Login</h2>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700">
               Email
