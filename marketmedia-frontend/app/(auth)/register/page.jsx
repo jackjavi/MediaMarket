@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import axios from "axios";
 
 const page = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -13,10 +14,14 @@ const page = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Perform registration logic here
-    console.log("Registration submitted:", user);
+    const res = await axios.post(
+      "http://localhost:8000/api/v1/auth/register",
+      user
+    );
+    console.log(res.data);
   };
 
   return (
