@@ -3,7 +3,7 @@ import ProductForm from "./productForm";
 
 const Section = () => {
   return (
-    <section className="mt-[15vh] flex h-[85vh]">
+    <section className="flex h-[85vh] ">
       <div className="flex md:w-[40vw] w-screen items-center justify-center">
         <div className="w-[70%] h-[85%] rounded-lg overflow-auto">
           <ProductForm />
