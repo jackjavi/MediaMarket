@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Preview from "./Preview";
 
 const ProductForm = () => {
@@ -12,7 +12,6 @@ const ProductForm = () => {
   const [albums, setAlbums] = useState([]);
   const [folders, setFolders] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
 
   const handleCategoryChange = (category) => {
     if (selectedCategories.includes(category)) {
@@ -48,28 +47,9 @@ const ProductForm = () => {
     setSelectedCategories([]);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const form = document.getElementById("product-form");
-      const formRect = form.getBoundingClientRect();
-      const topDistance = formRect.top;
-
-      if (topDistance <= 0) {
-        setShowPreview(true);
-      } else {
-        setShowPreview(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <div className="container mx-auto mt-8 p-2">
-      <form id="product-form" onSubmit={handleSubmit} className="text-gray-700">
+      <form onSubmit={handleSubmit} className="text-gray-700">
         <div className="mb-4">
           <label
             className="block mb-2 font-bold text-[whitesmoke]"
@@ -167,7 +147,6 @@ const ProductForm = () => {
             onChange={(e) => setFolders([...e.target.files])}
           />
         </div>
-
         <div className="mb-4">
           <label className="block mb-2 font-bold text-[whitesmoke]">
             Categories
@@ -211,18 +190,7 @@ const ProductForm = () => {
             </label>
           </div>
         </div>
-
-        <div className="mb-8">
-          <button
-            type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      {!showPreview && (
-        <div className="sticky bottom-4 right-4">
+        <div className="mt-4">
           <Preview
             product={{
               productName,
@@ -236,7 +204,15 @@ const ProductForm = () => {
             }}
           />
         </div>
-      )}
+        <div className="mt-4">
+          <button
+            type="submit"
+            className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
