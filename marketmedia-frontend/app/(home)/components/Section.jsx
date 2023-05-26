@@ -1,10 +1,13 @@
 import React from "react";
+import ProductForm from "./productForm";
 
 const Section = () => {
   return (
     <section className="mt-[15vh] flex h-[85vh]">
       <div className="flex w-[40vw] items-center justify-center">
-        <div className="w-[70%] h-[85%] bg-gray-200 rounded-lg">yes</div>
+        <div className="w-[70%] h-[85%] rounded-lg overflow-auto">
+          <ProductForm />
+        </div>
       </div>
       <div className="flex w-[60vw] pt-[15vh]">
         <div>
