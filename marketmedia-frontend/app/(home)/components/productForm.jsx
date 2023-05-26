@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Preview from "./Preview";
 
 const ProductForm = () => {
   const [productName, setProductName] = useState("");
@@ -188,6 +189,20 @@ const ProductForm = () => {
               <span className="ml-2">Text</span>
             </label>
           </div>
+        </div>
+        <div className="mt-4">
+          <Preview
+            product={{
+              productName,
+              description,
+              price,
+              images,
+              videos,
+              albums,
+              folders,
+              selectedCategories,
+            }}
+          />
         </div>
         <div className="mt-4">
           <button
