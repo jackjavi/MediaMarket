@@ -3,12 +3,12 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllProducts = async (req, res) => {
-  console.log(req.user.userId);
   const products = await Product.find({ createdBy: req.user.userId }).sort(
     "createdAt"
   );
   res.status(StatusCodes.OK).json({ products, count: products.length });
 };
+
 const getProduct = async (req, res) => {
   const {
     user: { userId },
@@ -33,15 +33,11 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const {
-    body: { name },
     user: { userId },
     params: { id: productId },
   } = req;
 
-  if (name === "") {
-    throw new BadRequestError("Name field cannot be empty");
-  }
-  const product = await Product.findByIdAndUpdate(
+  const product = await Product.findOneAndUpdate(
     { _id: productId, createdBy: userId },
     req.body,
     { new: true, runValidators: true }
@@ -58,7 +54,7 @@ const deleteProduct = async (req, res) => {
     params: { id: productId },
   } = req;
 
-  const product = await Product.findByIdAndRemove({
+  const product = await Product.findOneAndRemove({
     _id: productId,
     createdBy: userId,
   });

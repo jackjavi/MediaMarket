@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("mongoose-double")(mongoose);
 
-var SchemaTypes = mongoose.Schema.Types;
+const SchemaTypes = mongoose.Schema.Types;
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -18,12 +18,32 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: SchemaTypes.Double,
       required: [true, "Please provide product price"],
-      default: "pending",
+      default: 0,
     },
-    imageUrl: {
-      type: String,
+    images: {
+      type: [String],
       required: false,
-      default: "",
+      default: [],
+    },
+    videos: {
+      type: [String],
+      required: false,
+      default: [],
+    },
+    albums: {
+      type: [String],
+      required: false,
+      default: [],
+    },
+    folders: {
+      type: [String],
+      required: false,
+      default: [],
+    },
+    categories: {
+      type: [String],
+      required: false,
+      default: [],
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
