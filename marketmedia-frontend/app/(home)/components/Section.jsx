@@ -4,12 +4,12 @@ import ProductForm from "./productForm";
 const Section = () => {
   return (
     <section className="mt-[15vh] flex h-[85vh]">
-      <div className="flex w-[40vw] items-center justify-center">
+      <div className="flex md:w-[40vw] w-screen items-center justify-center">
         <div className="w-[70%] h-[85%] rounded-lg overflow-auto">
           <ProductForm />
         </div>
       </div>
-      <div className="flex w-[60vw] pt-[15vh]">
+      <div className="md:flex w-[60vw] pt-[15vh] hidden">
         <div>
           <h3 className="font-bold text-3xl max-w-[30vw]">
             Your One Stop shop for digital media
