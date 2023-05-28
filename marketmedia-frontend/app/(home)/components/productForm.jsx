@@ -1,18 +1,27 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Preview from "./Preview";
 
 const ProductForm = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [images, setImages] = useState([]);
-  const [videos, setVideos] = useState([]);
-  const [albums, setAlbums] = useState([]);
-  const [folders, setFolders] = useState([]);
+  const [images, setImages] = useState(null);
+  const [cloudImages, setCloudImages] = useState(null);
+  const [videos, setVideos] = useState(null);
+  const [cloudVideos, setCloudVideos] = useState(null);
+  const [albums, setAlbums] = useState(null);
+  const [cloudAlbums, setCloudAlbums] = useState(null);
+  const [audio, setAudio] = useState(null);
+  const [cloudAudio, setCloudAudio] = useState(null);
+  const [folders, setFolders] = useState(null);
+  const [cloudFolders, setCloudFolders] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [loading, setLoading] = useState(false); // Added loading state
 
   const handleCategoryChange = (category) => {
     if (selectedCategories.includes(category)) {
@@ -22,31 +31,155 @@ const ProductForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform submission logic here
-    console.log({
-      productName,
-      description,
-      price,
-      images,
-      videos,
-      albums,
-      folders,
-      selectedCategories,
-    });
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const formData = new FormData();
 
-    // Reset form fields
-    setProductName("");
-    setDescription("");
-    setPrice("");
-    setImages([]);
-    setVideos([]);
-    setAlbums([]);
-    setFolders([]);
-    setSelectedCategories([]);
+      // Append videos
+      if (videos) {
+        videos.forEach((video) => {
+          formData.append("files", video);
+        });
+
+        const videoResponse = await axios.post(
+          "http://localhost:8000/api/v1/video",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setCloudVideos([videoResponse.data]);
+        console.log(cloudVideos);
+      }
+
+      // Append images
+      if (images) {
+        images.forEach((image) => {
+          formData.append("files", image);
+        });
+        const imageResponse = await axios.post(
+          "http://localhost:8000/api/v1/upload/image",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setCloudImages(imageResponse.data);
+      }
+
+      // Append albums
+      if (audio) {
+        audio.forEach((aud) => {
+          formData.append("files", aud);
+        });
+
+        const audioResponse = await axios.post(
+          "http://localhost:8000/api/v1/audio",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setCloudAudio([audioResponse.data]);
+        console.log(cloudAudio);
+      }
+
+      // Append folders
+      if (folders) {
+        folders.forEach((folder) => {
+          formData.append("files", folder);
+        });
+        const folderResponse = await axios.post(
+          "http://localhost:8000/api/v1/upload/folder",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setCloudFolders(folderResponse.data);
+        console.log(cloudFolders);
+      }
+
+      {
+        /*// Send the product data to the API endpoint
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/products",
+        product,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res.data);*/
+      }
+
+      {
+        /*// Reset form fields
+      setProductName("");
+      setDescription("");
+      setPrice("");
+      setImages(null);
+      setVideos(null);
+      setAlbums(null);
+      setFolders(null);
+    setSelectedCategories([]);*/
+      }
+      // Set loading state to false after upload
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setLoading(false); // Set loading state to false in case of error
+    }
   };
+
+  useEffect(() => {
+    const sendProducts = async () => {
+      if (images !== null) {
+        const token = localStorage.getItem("token");
+        let completeProduct = {
+          name: productName,
+          description: description,
+          price: price,
+          images: cloudImages,
+          videos: cloudVideos,
+          albums: cloudAlbums,
+          folders: cloudFolders,
+          categories: selectedCategories,
+        };
+        setProduct(completeProduct);
+        // Send the product data to the API endpoint
+        const res = await axios.post(
+          "http://localhost:8000/api/v1/products",
+          product,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+          }
+        );
+        console.log(res.data);
+        setLoading(false);
+      }
+    };
+    sendProducts();
+  }, [cloudImages]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,13 +279,22 @@ const ProductForm = () => {
             Albums
           </label>
           <input
-            className="w-full px-3 py-2 border
-
-           rounded-md"
+            className="w-full px-3 py-2 border rounded-md"
             type="file"
-            accept=".zip"
+            accept=".zip, audio/*"
             multiple
-            onChange={(e) => setAlbums([...e.target.files])}
+            onChange={(e) => {
+              const selectedFiles = e.target.files;
+              const audioFiles = Array.from(selectedFiles).filter((file) =>
+                file.type.startsWith("audio/")
+              );
+              const zipFiles = Array.from(selectedFiles).filter(
+                (file) => file.type === "application/zip"
+              );
+              setAlbums([...zipFiles]);
+              setAudio([...audioFiles]); // Store selected audio files in the audio state
+              // Process zipFiles as needed
+            }}
           />
         </div>
         <div className="mb-4">
@@ -216,11 +358,13 @@ const ProductForm = () => {
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            disabled={loading}
           >
-            Submit
+            {loading ? "Uploading..." : "Submit"}
           </button>
         </div>
       </form>
+
       {!showPreview && (
         <div className="sticky bottom-4 right-4">
           <Preview

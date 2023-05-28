@@ -30,9 +30,7 @@ const NavBar = () => {
     <div className=" flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
       <div>
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer">
-          <Link href="/" smooth duration={500}>
-            MEDIA MARKET
-          </Link>
+          <Link href="/">MEDIA MARKET</Link>
         </h1>
       </div>
 
