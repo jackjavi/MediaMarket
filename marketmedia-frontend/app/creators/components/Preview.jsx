@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 const Preview = ({ product }) => {
@@ -9,43 +11,6 @@ const Preview = ({ product }) => {
 
   const handleClosePreview = () => {
     setShowPreview(false);
-  };
-
-  const renderMediaPreview = () => {
-    const mediaFiles = [...product.images, ...product.videos];
-
-    if (mediaFiles.length > 0) {
-      return (
-        <div className="flex flex-wrap gap-2">
-          {mediaFiles.map((file, index) => {
-            if (file.type.startsWith("image")) {
-              return (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt={`Image ${index + 1}`}
-                  className="w-20 h-20 object-cover rounded-md"
-                />
-              );
-            } else if (file.type.startsWith("video")) {
-              return (
-                <video
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt={`Video ${index + 1}`}
-                  className="w-20 h-20 object-cover rounded-md"
-                  controls
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-      );
-    }
-
-    return null;
   };
 
   return (
@@ -73,25 +38,21 @@ const Preview = ({ product }) => {
             </p>
 
             {/* Media Preview */}
-            <div className="flex flex-wrap gap-2">
-              {product.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(image)}
-                  alt={`Image ${index + 1}`}
-                  className="w-20 h-20 object-cover rounded-md"
-                />
-              ))}
-              {product.videos.map((video, index) => (
-                <video
-                  key={index}
-                  src={URL.createObjectURL(video)}
-                  alt={`Video ${index + 1}`}
-                  className="w-20 h-20 object-cover rounded-md"
-                  controls
-                />
-              ))}
-            </div>
+            {product.images && product.images.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {product.images.map((image, index) => (
+                  <img key={index} src={image.url} alt={`Image ${index + 1}`} />
+                ))}
+              </div>
+            )}
+
+            {product.videos && product.videos.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {product.videos.map((video, index) => (
+                  <video key={index} src={video.url} controls />
+                ))}
+              </div>
+            )}
 
             <button
               type="button"

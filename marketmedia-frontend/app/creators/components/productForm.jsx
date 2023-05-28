@@ -74,7 +74,59 @@ const ProductForm = () => {
             },
           }
         );
-        setCloudImages(imageResponse.data);
+        if (imageResponse.data) {
+          const imageUrls = imageResponse.data.map((image) => image.url); // Extract the URLs from the response data
+          // Store imageUrls in localStorage
+          localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
+
+          // Modify the sendProducts function
+          const sendProducts = () => {
+            // Your code to send the completeProduct to the backend
+            const token = localStorage.getItem("token");
+            let parsedImageUrls;
+            const storedImageUrls = localStorage.getItem("imageUrls");
+            if (storedImageUrls) {
+              parsedImageUrls = JSON.parse(storedImageUrls);
+              setCloudImages(parsedImageUrls);
+            }
+
+            let completeProductWithUrls = {
+              name: productName,
+              description: description,
+              price: price,
+              images: parsedImageUrls,
+              videos: cloudVideos,
+              albums: cloudAlbums,
+              folders: cloudFolders,
+              categories: selectedCategories,
+            };
+            setProduct(completeProductWithUrls);
+
+            // Send the completeProductWithUrls to the backend
+            axios
+              .post(
+                "http://localhost:8000/api/v1/products",
+                completeProductWithUrls,
+                {
+                  headers: {
+                    Authorization: `Bearer ${JSON.parse(token)}`,
+                  },
+                }
+              )
+              .then((response) => {
+                // Handle the response from the backend
+                console.log("Product sent successfully:", response.data);
+                setLoading(false);
+              })
+              .catch((error) => {
+                // Handle errors
+                console.error("Error sending product:", error);
+                setLoading(false);
+              });
+          };
+
+          sendProducts(); // Call the sendProducts function
+        }
       }
 
       // Append albums
@@ -116,70 +168,12 @@ const ProductForm = () => {
         console.log(cloudFolders);
       }
 
-      {
-        /*// Send the product data to the API endpoint
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/products",
-        product,
-        {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(token)}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(res.data);*/
-      }
-
-      {
-        /*// Reset form fields
-      setProductName("");
-      setDescription("");
-      setPrice("");
-      setImages(null);
-      setVideos(null);
-      setAlbums(null);
-      setFolders(null);
-    setSelectedCategories([]);*/
-      }
       // Set loading state to false after upload
     } catch (error) {
       console.error("Error submitting form:", error);
       setLoading(false); // Set loading state to false in case of error
     }
   };
-
-  useEffect(() => {
-    const sendProducts = async () => {
-      if (images !== null) {
-        const token = localStorage.getItem("token");
-        let completeProduct = {
-          name: productName,
-          description: description,
-          price: price,
-          images: cloudImages,
-          videos: cloudVideos,
-          albums: cloudAlbums,
-          folders: cloudFolders,
-          categories: selectedCategories,
-        };
-        setProduct(completeProduct);
-        // Send the product data to the API endpoint
-        const res = await axios.post(
-          "http://localhost:8000/api/v1/products",
-          product,
-          {
-            headers: {
-              Authorization: `Bearer ${JSON.parse(token)}`,
-            },
-          }
-        );
-        console.log(res.data);
-        setLoading(false);
-      }
-    };
-    sendProducts();
-  }, [cloudImages]);
 
   useEffect(() => {
     const handleScroll = () => {
