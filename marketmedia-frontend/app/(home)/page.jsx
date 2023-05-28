@@ -1,11 +1,16 @@
-import Navbar from "./components/Navbar";
-import Section from "./components/Section";
+"use client";
 
-export default function Home() {
+import React from "react";
+import NavBar from "../creators/components/Navbar";
+import Post from "./components/post";
+
+const page = () => {
   return (
-    <main className="flex min-h-screen flex-col">
-      <Navbar />
-      <Section />
+    <main>
+      <NavBar />
+      <Post />
     </main>
   );
-}
+};
+
+export default page;
