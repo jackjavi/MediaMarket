@@ -8,10 +8,13 @@ const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
 const express = require("express");
-const statusCode = require("http-status-codes");
 const connectDB = require("./db/connect");
 const authenticateUser = require("./middleware/authentication");
-
+const imageRoute = require("./routes/imagesRoute");
+const videoRoute = require("./routes/videosRoute");
+const folderRoute = require("./routes/foldersRoute");
+const albumRoute = require("./routes/albumsRoute");
+const audioRoute = require("./routes/audioRoute");
 const app = express();
 
 const port = process.env.port || 8000;
@@ -40,6 +43,11 @@ app.use(xss());
 // routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/products", authenticateUser, productsRouter);
+app.use("/api/v1/upload/image", imageRoute);
+app.use("/api/v1/video", videoRoute);
+app.use("/api/v1/upload/folder", folderRoute);
+app.use("/api/v1/upload/album", albumRoute);
+app.use("/api/v1/audio", audioRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

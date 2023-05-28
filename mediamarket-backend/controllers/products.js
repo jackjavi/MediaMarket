@@ -1,6 +1,23 @@
+const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
+
+const createProduct = async (req, res) => {
+  try {
+    req.body.createdBy = req.user.userId;
+
+    // Create the product in the database
+    const product = await Product.create(req.body);
+
+    res.status(StatusCodes.CREATED).json(product);
+  } catch (error) {
+    console.error("Error creating product:", error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: "An error occurred while creating the product",
+    });
+  }
+};
 
 const getAllProducts = async (req, res) => {
   const products = await Product.find({ createdBy: req.user.userId }).sort(
@@ -23,12 +40,6 @@ const getProduct = async (req, res) => {
     throw new NotFoundError(`No product with id ${productId}`);
   }
   res.status(StatusCodes.OK).json({ product });
-};
-
-const createProduct = async (req, res) => {
-  req.body.createdBy = req.user.userId;
-  const product = await Product.create(req.body);
-  res.status(StatusCodes.CREATED).json({ product });
 };
 
 const updateProduct = async (req, res) => {

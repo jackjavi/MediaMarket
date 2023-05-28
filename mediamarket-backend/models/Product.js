@@ -7,17 +7,17 @@ const ProductSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please provide product name"],
+      required: false, //[true, "Please provide product name"],
       maxlength: 50,
     },
     description: {
       type: String,
-      required: [true, "Please provide product description"],
+      required: false, //[true, "Please provide product description"],
       maxlength: 200,
     },
     price: {
       type: SchemaTypes.Double,
-      required: [true, "Please provide product price"],
+      required: false, //[true, "Please provide product price"],
       default: 0,
     },
     images: {
