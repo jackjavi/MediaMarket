@@ -45,17 +45,19 @@ const Post = () => {
     fetchProducts();
   }, []);
 
-  const handleClick = (productId) => {
-    router.push(`/product/${productId}`);
+  const handleClick = (slug) => {
+    // Store the slug value in localStorage as a JSON string
+    localStorage.setItem("slug", JSON.stringify(slug));
   };
 
   return (
-    <div className="h-[85vh] px-[5vw] bg-yellow-300">
+    <div className="h-[85vh] px-[5vw] bg-purple-400">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <div
             key={product._id}
             className="mt-4 border shadow p-4 w-full rounded"
+            onClick={() => handleClick(product._id)}
           >
             <div>
               {product.images.length > 0 && (
