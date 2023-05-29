@@ -196,7 +196,11 @@ const ProductForm = () => {
 
   return (
     <div className="container mx-auto mt-8 p-2">
-      <form id="product-form" onSubmit={handleSubmit} className="text-gray-700">
+      <form
+        id="product-form"
+        onSubmit={handleSubmit}
+        className="text-gray-700 "
+      >
         <div className="mb-4">
           <label
             className="block mb-2 font-bold text-[whitesmoke]"
