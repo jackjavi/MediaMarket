@@ -50,7 +50,7 @@ const Post = () => {
   };
 
   return (
-    <div className="h-[85vh] mx-[5vw]">
+    <div className="h-[85vh] px-[5vw] bg-yellow-300">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <div
@@ -61,7 +61,7 @@ const Post = () => {
               {product.images.length > 0 && (
                 <Link href={`/product/${product._id}`}>
                   <Image
-                    className="rounded-md"
+                    className="rounded-md h-[150px] md:h-[150px] object-cover w-[100%]"
                     src={product.images[0]} // Assuming the first image is used
                     alt={product.name}
                     width={400}

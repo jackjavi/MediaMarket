@@ -27,7 +27,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className=" flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
+    <div className="bg-purple-400 flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
       <div>
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer">
           <Link href="/">MEDIA MARKET</Link>
