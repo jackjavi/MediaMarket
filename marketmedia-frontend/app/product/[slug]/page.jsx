@@ -54,7 +54,7 @@ const page = () => {
   return (
     <div className="h-full w-full  bg-gray-200">
       <NavBar />
-      <div className="pt-24 flex flex-col w-[90vw] m-auto gap-4">
+      <div className=" pt-24 flex flex-col w-[90vw] m-auto gap-4">
         <div className="scrollbar scrollbar-hide flex-[12] flex justify-center pt-20 h-screen overflow-auto">
           <div className="flex flex-col items-center">
             <img
