@@ -28,8 +28,15 @@ const NavBar = () => {
 
   return (
     <div className="bg-purple-400 flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
-      <div>
-        <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer">
+      <div className="flex ">
+        <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer flex items-center justify-center">
+          <Link href="/">
+            <span className="bg-white rounded-full p-2 text-blue-500 text-base md:text-3xl mr-2 ">
+              MM
+            </span>
+          </Link>
+        </h1>
+        <h1 className="text-5xl hidden md:flex font-bold font-signature ml-2 cursor-pointer">
           <Link href="/">MEDIA MARKET</Link>
         </h1>
       </div>

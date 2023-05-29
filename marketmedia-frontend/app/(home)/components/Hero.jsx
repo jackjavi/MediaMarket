@@ -21,7 +21,7 @@ const Hero = () => {
         height: "100%",
         position: "relative",
       }}
-      className="hero hidden md:block"
+      className="hero  md:block"
     >
       <div
         className="bg-hero-overlay absolute inset-0"
