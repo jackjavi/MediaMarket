@@ -209,7 +209,7 @@ const ProductForm = () => {
             Product Name
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border border-purple-400 outline-purple-400 rounded-md"
             type="text"
             id="productName"
             value={productName}
@@ -225,7 +225,7 @@ const ProductForm = () => {
             Description
           </label>
           <textarea
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -240,7 +240,7 @@ const ProductForm = () => {
             Price
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="number"
             id="price"
             value={price}
@@ -253,7 +253,7 @@ const ProductForm = () => {
             Images
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
             accept="image/*"
             multiple
@@ -265,7 +265,7 @@ const ProductForm = () => {
             Videos
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
             accept="video/*"
             multiple
@@ -277,7 +277,7 @@ const ProductForm = () => {
             Albums
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
             accept=".zip, audio/*"
             multiple
@@ -300,7 +300,7 @@ const ProductForm = () => {
             Folders
           </label>
           <input
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
             webkitdirectory=""
             directory=""

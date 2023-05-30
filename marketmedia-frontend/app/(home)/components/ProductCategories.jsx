@@ -2,9 +2,9 @@ import React from "react";
 
 const ProductCategories = () => {
   return (
-    <div className="bg-gray-200 p-4 mt-4 h-[85vh]">
-      <h2 className="text-xl font-bold mb-2">Digital Product Categories</h2>
-      <div className="grid grid-cols-3 gap-4">
+    <div className="bg-purple-400 rounded-md p-4 mt-4 h-[85vh]">
+      <h2 className="text-xl  font-bold mb-2">Digital Product Categories</h2>
+      <div className="grid grid-rows-3 gap-4 items-center justify-center">
         {/* Add category cards */}
         <div className="bg-white rounded-md p-4">
           <h3 className="text-lg font-semibold">Category 1</h3>

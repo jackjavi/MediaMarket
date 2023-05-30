@@ -56,7 +56,7 @@ const Post = () => {
         {products.map((product) => (
           <div
             key={product._id}
-            className="mt-4 border shadow p-4 w-full rounded"
+            className="mt-4 border-2 border-purple-400 shadow p-4 w-full rounded"
             onClick={() => handleClick(product._id)}
           >
             <div>
