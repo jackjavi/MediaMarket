@@ -26,7 +26,7 @@ router.post("/", upload.array("files"), async (req, res) => {
       return cldRes;
     });
     const results = await Promise.all(filePromises);
-    console.log(results);
+
     // Extract the URLs from the Cloudinary responses
     const imageURLs = results.map((result) => result.url);
 

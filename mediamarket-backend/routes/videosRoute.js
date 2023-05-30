@@ -17,6 +17,7 @@ router.post("/", upload.array("files"), async (req, res) => {
     if (!files || files.length === 0) {
       throw new Error("No files were uploaded");
     }
+
     const filePromises = files.map(async (file) => {
       const b64 = Buffer.from(file.buffer).toString("base64");
 
@@ -30,7 +31,7 @@ router.post("/", upload.array("files"), async (req, res) => {
     // Extract the URLs from the Cloudinary responses
     const videoURLs = results.map((result) => result.url);
 
-    res.status(200).json(videoURLs);
+    res.status(200).json(results);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
