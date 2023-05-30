@@ -39,26 +39,6 @@ const ProductForm = () => {
       const token = localStorage.getItem("token");
       const formData = new FormData();
 
-      // Append videos
-      if (videos) {
-        videos.forEach((video) => {
-          formData.append("files", video);
-        });
-
-        const videoResponse = await axios.post(
-          "http://localhost:8000/api/v1/video",
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${JSON.parse(token)}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        setCloudVideos([videoResponse.data]);
-        console.log(cloudVideos);
-      }
-
       // Append images
       if (images) {
         images.forEach((image) => {
@@ -79,15 +59,42 @@ const ProductForm = () => {
           // Store imageUrls in localStorage
           localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
 
+          // Append videos
+          if (videos) {
+            videos.forEach((productFile) => {
+              formData.append("files", productFile);
+            });
+
+            const videoResponse = await axios.post(
+              "http://localhost:8000/api/v1/video",
+              formData,
+              {
+                headers: {
+                  Authorization: `Bearer ${JSON.parse(token)}`,
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            );
+            if (videoResponse.data) {
+              const productUrls = videoResponse.data.map((file) => file.url); // Extract the URLs from the response data
+              // Store imageUrls in localStorage
+              localStorage.setItem("fileUrls", JSON.stringify(productUrls));
+            }
+          }
           // Modify the sendProducts function
           const sendProducts = () => {
             // Your code to send the completeProduct to the backend
             const token = localStorage.getItem("token");
             let parsedImageUrls;
+            let parsedProductUrls;
             const storedImageUrls = localStorage.getItem("imageUrls");
             if (storedImageUrls) {
               parsedImageUrls = JSON.parse(storedImageUrls);
               setCloudImages(parsedImageUrls);
+            }
+            const storedProductUrls = localStorage.getItem("productUrls");
+            if (storedProductUrls) {
+              parsedProductUrls = JSON.parse(storedProductUrls);
             }
 
             let completeProductWithUrls = {
@@ -95,7 +102,7 @@ const ProductForm = () => {
               description: description,
               price: price,
               images: parsedImageUrls,
-              videos: cloudVideos,
+              videos: cloudVideos || parsedProductUrls,
               albums: cloudAlbums,
               folders: cloudFolders,
               categories: selectedCategories,
@@ -262,14 +269,14 @@ const ProductForm = () => {
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold text-[whitesmoke]">
-            Videos
+            Product Files - All types
           </label>
           <input
             className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
-            accept="video/*"
-            multiple
-            onChange={(e) => setVideos([...e.target.files])}
+            onChange={(e) =>
+              setVideos(e.target.files[0] ? [e.target.files[0]] : null)
+            }
           />
         </div>
         <div className="mb-4">

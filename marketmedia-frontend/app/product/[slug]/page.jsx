@@ -54,11 +54,11 @@ const page = () => {
   return (
     <div className="h-full w-full  bg-gray-200">
       <NavBar />
-      <div className=" pt-24 flex flex-col w-[90vw] m-auto gap-4">
-        <div className="scrollbar scrollbar-hide flex-[12] flex justify-center pt-20 h-screen overflow-auto">
+      <div className=" pt-12 h-[85vh] flex flex-col w-[90vw] m-auto gap-4">
+        <div className=" flex-[12] flex justify-center pt-20 h-full overflow-auto no-scrollbar">
           <div className="flex flex-col items-center">
             <img
-              className="rounded-md h-[300px] w-full object-cover"
+              className="rounded-md h-[40%] w-full object-cover"
               src={product.images}
               alt=""
             />
@@ -72,7 +72,7 @@ const page = () => {
             </p>
 
             <p className="font-lora text-[16px] w-[90%] md:w-[50%] leading-8 text-[#666] first-letter:text-[30px] first-letter:ml-[20px] first-letter:font-semibold">
-              Desc: {product.description}
+              {product.description}
             </p>
           </div>
         </div>
