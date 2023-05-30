@@ -60,16 +60,28 @@ const Post = () => {
             onClick={() => handleClick(product._id)}
           >
             <div>
-              {product.images.length > 0 && (
+              {product.videos && product.videos.length > 0 ? (
                 <Link href={`/product/${product._id}`}>
-                  <Image
+                  <video
                     className="rounded-md h-[150px] md:h-[150px] object-cover w-[100%]"
-                    src={product.images[0]} // Assuming the first image is used
-                    alt={product.name}
-                    width={400}
-                    height={300}
-                  />
+                    controls
+                  >
+                    <source src={product.videos[0]} type="video/mp4" />
+                    {/* Add additional source tags for different video formats if needed */}
+                  </video>
                 </Link>
+              ) : (
+                product.images.length > 0 && (
+                  <Link href={`/product/${product._id}`}>
+                    <Image
+                      className="rounded-md h-[150px] md:h-[150px] object-cover w-[100%]"
+                      src={product.images[0]} // Assuming the first image is used
+                      alt={product.name}
+                      width={400}
+                      height={300}
+                    />
+                  </Link>
+                )
               )}
 
               <Link href={`/product/${product._id}`}>

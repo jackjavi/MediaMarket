@@ -11,6 +11,7 @@ const ProductForm = () => {
   const [images, setImages] = useState(null);
   const [cloudImages, setCloudImages] = useState(null);
   const [videos, setVideos] = useState(null);
+  const [prodUrls, SetProdUrl] = useState(null);
   const [cloudVideos, setCloudVideos] = useState(null);
   const [albums, setAlbums] = useState(null);
   const [cloudAlbums, setCloudAlbums] = useState(null);
@@ -30,6 +31,54 @@ const ProductForm = () => {
       setSelectedCategories([...selectedCategories, category]);
     }
   };
+  const sendProducts = () => {
+    // Your code to send the completeProduct to the backend
+    const token = localStorage.getItem("token");
+    let parsedImageUrls;
+    let parsedProductUrls;
+    const storedImageUrls = localStorage.getItem("imageUrls");
+    if (storedImageUrls) {
+      parsedImageUrls = JSON.parse(storedImageUrls);
+      setCloudImages(parsedImageUrls);
+    }
+    const storedProductUrls = localStorage.getItem("fileUrls");
+    if (storedProductUrls) {
+      parsedProductUrls = JSON.parse(storedProductUrls);
+      SetProdUrl(parsedProductUrls);
+    }
+    console.log(prodUrls);
+    console.log(parsedProductUrls);
+    let completeProductWithUrls = {
+      name: productName,
+      description: description,
+      price: price,
+      images: parsedImageUrls,
+      videos: parsedProductUrls ? parsedProductUrls : videos,
+      albums: cloudAlbums,
+      folders: cloudFolders,
+      categories: selectedCategories,
+    };
+    setProduct(completeProductWithUrls);
+    console.log(completeProductWithUrls);
+
+    // Send the completeProductWithUrls to the backend
+    axios
+      .post("http://localhost:8000/api/v1/products", completeProductWithUrls, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        // Handle the response from the backend
+        console.log("Product sent successfully:", response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Error sending product:", error);
+        setLoading(false);
+      });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +92,7 @@ const ProductForm = () => {
       if (images) {
         images.forEach((image) => {
           formData.append("files", image);
+          console.log(image);
         });
         const imageResponse = await axios.post(
           "http://localhost:8000/api/v1/upload/image",
@@ -58,6 +108,8 @@ const ProductForm = () => {
           const imageUrls = imageResponse.data.map((image) => image.url); // Extract the URLs from the response data
           // Store imageUrls in localStorage
           localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
+          console.log(imageUrls);
+          formData.delete("files");
 
           // Append videos
           if (videos) {
@@ -79,60 +131,13 @@ const ProductForm = () => {
               const productUrls = videoResponse.data.map((file) => file.url); // Extract the URLs from the response data
               // Store imageUrls in localStorage
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
+              sendProducts();
+              setLoading(false);
             }
           }
           // Modify the sendProducts function
-          const sendProducts = () => {
-            // Your code to send the completeProduct to the backend
-            const token = localStorage.getItem("token");
-            let parsedImageUrls;
-            let parsedProductUrls;
-            const storedImageUrls = localStorage.getItem("imageUrls");
-            if (storedImageUrls) {
-              parsedImageUrls = JSON.parse(storedImageUrls);
-              setCloudImages(parsedImageUrls);
-            }
-            const storedProductUrls = localStorage.getItem("productUrls");
-            if (storedProductUrls) {
-              parsedProductUrls = JSON.parse(storedProductUrls);
-            }
 
-            let completeProductWithUrls = {
-              name: productName,
-              description: description,
-              price: price,
-              images: parsedImageUrls,
-              videos: cloudVideos || parsedProductUrls,
-              albums: cloudAlbums,
-              folders: cloudFolders,
-              categories: selectedCategories,
-            };
-            setProduct(completeProductWithUrls);
-
-            // Send the completeProductWithUrls to the backend
-            axios
-              .post(
-                "http://localhost:8000/api/v1/products",
-                completeProductWithUrls,
-                {
-                  headers: {
-                    Authorization: `Bearer ${JSON.parse(token)}`,
-                  },
-                }
-              )
-              .then((response) => {
-                // Handle the response from the backend
-                console.log("Product sent successfully:", response.data);
-                setLoading(false);
-              })
-              .catch((error) => {
-                // Handle errors
-                console.error("Error sending product:", error);
-                setLoading(false);
-              });
-          };
-
-          sendProducts(); // Call the sendProducts function
+          // Call the sendProducts function
         }
       }
 
@@ -263,6 +268,7 @@ const ProductForm = () => {
             className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
             accept="image/*"
+            required
             multiple
             onChange={(e) => setImages([...e.target.files])}
           />
@@ -274,9 +280,10 @@ const ProductForm = () => {
           <input
             className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
             type="file"
-            onChange={(e) =>
-              setVideos(e.target.files[0] ? [e.target.files[0]] : null)
-            }
+            accept="*"
+            required
+            multiple
+            onChange={(e) => setVideos([...e.target.files])}
           />
         </div>
         <div className="mb-4">

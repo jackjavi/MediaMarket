@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductCategories = () => {
   return (
-    <div className="bg-purple-400 rounded-md p-4  h-[85vh]">
+    <div className="bg-purple-400 rounded-md p-4 hidden md:block h-[85vh]">
       <h2 className="text-xl  font-bold mb-2">Digital Product Categories</h2>
       <div className="grid grid-rows-3 gap-4 items-center justify-center">
         {/* Add category cards */}
