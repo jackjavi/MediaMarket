@@ -134,7 +134,7 @@ const ProductForm = () => {
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
               sendProducts();
               setLoading(false);
-              router.push("/")
+              router.push("/");
             }
           }
           // Modify the sendProducts function
