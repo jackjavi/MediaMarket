@@ -3,6 +3,7 @@ import NavBar from "../creators/components/Navbar";
 import Post from "./components/post";
 import Hero from "./components/Hero";
 import ProductCategories from "./components/ProductCategories";
+import Categories from "./components/Categories";
 import Footer from "./components/Footer";
 
 const page = () => {
@@ -20,6 +21,7 @@ const page = () => {
             <ProductCategories />
           </div>
         </div>
+        <Categories />
       </main>
       <Footer />
     </>

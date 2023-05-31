@@ -52,7 +52,7 @@ const Post = () => {
 
   return (
     <div className="h-[85vh] overflow-y-scroll no-scrollbar">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {products.map((product) => (
           <div
             key={product._id}
@@ -74,7 +74,7 @@ const Post = () => {
                 product.images.length > 0 && (
                   <Link href={`/product/${product._id}`}>
                     <Image
-                      className="rounded-md h-[150px] md:h-[150px] object-cover w-[100%]"
+                      className="rounded-md shadow-md shadow-purple-400 h-[150px] md:h-[150px] object-cover w-[100%]"
                       src={product.images[0]} // Assuming the first image is used
                       alt={product.name}
                       width={400}
@@ -83,26 +83,27 @@ const Post = () => {
                   </Link>
                 )
               )}
+              <div className="bg-purple-300 rounded-md h-[100px] shadow-lg shadow-purple-400">
+                <Link href={`/product/${product._id}`}>
+                  <h4 className="mt-2 px-2 font-josefin text-2xl font-bold text-blue-400">
+                    {product.name}
+                  </h4>
+                </Link>
 
-              <Link href={`/product/${product._id}`}>
-                <h4 className="mt-2 font-josefin text-2xl font-bold text-[#bcbe0c]">
-                  {product.name}
-                </h4>
-              </Link>
+                <div className="flex items-center justify-between px-2">
+                  <p className="mt-2 text-blue-400 font-lora italic text-sm">
+                    {product.categories.join(", ")}
+                  </p>
 
-              <div className="flex items-center justify-between">
-                <p className="mt-2 text-[#999] font-lora italic text-sm">
-                  {product.categories.join(", ")}
-                </p>
+                  <p className="mt-2 text-blue-400  font-lora italic text-sm">
+                    {product.price}
+                  </p>
+                </div>
 
-                <p className="mt-2 text-[#999] font-lora italic text-sm">
-                  {product.price}
+                <p className="mt-2 px-2 overflow-hidden font-valera text-sm leading-6 text-blue-400 ">
+                  {product.description}
                 </p>
               </div>
-
-              <p className="mt-2 overflow-hidden font-valera text-sm leading-6 text-[#444]">
-                {product.description}
-              </p>
             </div>
           </div>
         ))}

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Preview from "./Preview";
+import { router } from "next/navigation";
 
 const ProductForm = () => {
   const [productName, setProductName] = useState("");
@@ -133,6 +134,7 @@ const ProductForm = () => {
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
               sendProducts();
               setLoading(false);
+              router.push("/")
             }
           }
           // Modify the sendProducts function
