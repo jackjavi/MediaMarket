@@ -345,7 +345,7 @@ const ProductForm = () => {
                 checked={selectedCategories.includes("video")}
                 onChange={() => handleCategoryChange("video")}
               />
-              <span className="ml-2">Video</span>
+              <span className="ml-2">3D</span>
             </label>
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
@@ -354,7 +354,7 @@ const ProductForm = () => {
                 checked={selectedCategories.includes("photo")}
                 onChange={() => handleCategoryChange("photo")}
               />
-              <span className="ml-2">Photo</span>
+              <span className="ml-2">Comics and graphic Novels</span>
             </label>
             <label className="inline-flex items-center text-[whitesmoke]">
               <input
@@ -363,7 +363,52 @@ const ProductForm = () => {
                 checked={selectedCategories.includes("text")}
                 onChange={() => handleCategoryChange("text")}
               />
-              <span className="ml-2">Text</span>
+              <span className="ml-2">Fictin Books</span>
+            </label>
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
+              <input
+                type="checkbox"
+                value="audio"
+                checked={selectedCategories.includes("audio")}
+                onChange={() => handleCategoryChange("audio")}
+              />
+              <span className="ml-2">Films</span>
+            </label>
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
+              <input
+                type="checkbox"
+                value="video"
+                checked={selectedCategories.includes("video")}
+                onChange={() => handleCategoryChange("video")}
+              />
+              <span className="ml-2">Fitness and Health</span>
+            </label>
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
+              <input
+                type="checkbox"
+                value="photo"
+                checked={selectedCategories.includes("photo")}
+                onChange={() => handleCategoryChange("photo")}
+              />
+              <span className="ml-2">Education</span>
+            </label>
+            <label className="inline-flex items-center text-[whitesmoke]">
+              <input
+                type="checkbox"
+                value="text"
+                checked={selectedCategories.includes("text")}
+                onChange={() => handleCategoryChange("text")}
+              />
+              <span className="ml-2">Design</span>
+            </label>
+            <label className="inline-flex items-center text-[whitesmoke]">
+              <input
+                type="checkbox"
+                value="text"
+                checked={selectedCategories.includes("text")}
+                onChange={() => handleCategoryChange("text")}
+              />
+              <span className="ml-2">Business and Money</span>
             </label>
           </div>
         </div>
