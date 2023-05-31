@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { lora, mono } from "../../fonts/fonts";
 
 const Hero = () => {
   const router = useRouter();
@@ -29,10 +30,10 @@ const Hero = () => {
       ></div>
       <div className="bg-hero-image h-[85vh] flex justify-center items-center relative">
         <div className="text-center text-white">
-          <h1 className="text-4xl font-bold mb-4">
+          <h1 className="text-4xl font-bold mb-4 font-mono">
             Your One-stop shop for digital media downloads.
           </h1>
-          <p className="text-xl">
+          <p className="text-xl font-lora">
             Empower yourself by creating and selling unique digital products.
             Let's go and make something awesome!
           </p>

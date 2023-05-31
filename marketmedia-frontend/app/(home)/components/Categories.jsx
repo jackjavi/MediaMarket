@@ -71,6 +71,21 @@ const Categories = () => {
     // Add more category objects here...
   ];
 
+  const getRandomColor = () => {
+    const colors = [
+      "#F87171",
+      "#FBBF24",
+      "#FCD34D",
+      "#34D399",
+      "#60A5FA",
+      "#A78BFA",
+      "#F472B6",
+      "#C084FC",
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
   return (
     <section className="min-h-screen">
       {/* Looking for inspiration Section */}
@@ -95,7 +110,11 @@ const Categories = () => {
                 height={100}
                 alt={productCard.title + " Category"}
               />
-              <div className="bg-blue-400 rounded-md p-4">
+
+              <div
+                style={{ backgroundColor: getRandomColor() }}
+                className=" rounded-md p-4"
+              >
                 <h3 className="Lora text-xl text-blue-900 font-semibold mb-2">
                   {productCard.title}
                 </h3>
