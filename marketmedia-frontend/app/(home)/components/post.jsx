@@ -83,54 +83,44 @@ const Post = () => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="mt-4 border-4 border-blue-400 shadow-lg shadow-purple-400 p-4 w-full rounded"
+              className="mt-4 border-2 h-full border-blue-400 shadow-lg shadow-purple-400 p-4 w-full rounded"
               onClick={() => handleClick(product._id)}
             >
               <div>
-                {product.videos && product.videos.length > 0 ? (
-                  <Link href={`/product/${product._id}`}>
-                    <video
-                      className="rounded-md h-[150px] md:h-[150px] object-cover w-[100%]"
-                      controls
-                    >
-                      <source src={product.videos[0]} type="video/mp4" />
-                      {/* Add additional source tags for different video formats if needed */}
-                    </video>
-                  </Link>
-                ) : (
-                  product.images.length > 0 && (
+                {product.images && product.images.length > 0 && (
+                  <div className="h-[50vh]">
                     <Link href={`/product/${product._id}`}>
                       <Image
-                        className="rounded-md shadow-md shadow-blue-400 h-[150px] md:h-[150px] object-cover object-top w-[100%]"
+                        className="rounded-md  h-full object-cover object-top w-[100%]"
                         src={product.images[0]} // Assuming the first image is used
                         alt={product.name}
                         width={400}
                         height={300}
                       />
                     </Link>
-                  )
+                  </div>
                 )}
                 <div
                   style={{ backgroundColor: getRandomColor() }}
-                  className=" rounded-md h-[100px] shadow-lg shadow-blue-400"
+                  className=" rounded-md h-[20vh] shadow-lg shadow-blue-400"
                 >
                   <Link href={`/product/${product._id}`}>
-                    <h4 className="mt-2 px-2 font-josefin text-2xl font-bold text-blue-400">
+                    <h4 className="mt-2 px-2 font-josefin text-2xl font-bold text-[whitesmoke]">
                       {product.name}
                     </h4>
                   </Link>
 
                   <div className="flex items-center justify-between px-2">
-                    <p className="mt-2 text-blue-400 font-lora italic text-sm">
+                    <p className="mt-2 text-[whitesmoke] font-lora italic text-sm">
                       {product.categories.join(", ")}
                     </p>
 
-                    <p className="mt-2 text-blue-400  font-lora italic text-sm">
+                    <p className="mt-2 text-[whitesmoke]  font-lora italic text-sm">
                       {product.price}
                     </p>
                   </div>
 
-                  <p className="mt-2 px-2 overflow-hidden font-valera text-sm leading-6 text-blue-400 ">
+                  <p className="mt-2 px-2 overflow-hidden font-valera text-sm leading-6 text-[whitesmoke] ">
                     {product.description}
                   </p>
                 </div>

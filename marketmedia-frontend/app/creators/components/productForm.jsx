@@ -14,21 +14,18 @@ const ProductForm = () => {
   const [videos, setVideos] = useState(null);
   const [prodUrls, SetProdUrl] = useState(null);
   const [cloudVideos, setCloudVideos] = useState(null);
-  const [albums, setAlbums] = useState(null);
-  const [cloudAlbums, setCloudAlbums] = useState(null);
-  const [audio, setAudio] = useState(null);
-  const [cloudAudio, setCloudAudio] = useState(null);
-  const [folders, setFolders] = useState(null);
-  const [cloudFolders, setCloudFolders] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false); // Added loading state
 
   const handleCategoryChange = (category) => {
+    // Check if the category is already selected
     if (selectedCategories.includes(category)) {
+      // Remove the category from the selected categories
       setSelectedCategories(selectedCategories.filter((c) => c !== category));
     } else {
+      // Add the category to the selected categories
       setSelectedCategories([...selectedCategories, category]);
     }
   };
@@ -47,20 +44,16 @@ const ProductForm = () => {
       parsedProductUrls = JSON.parse(storedProductUrls);
       SetProdUrl(parsedProductUrls);
     }
-    console.log(prodUrls);
-    console.log(parsedProductUrls);
+
     let completeProductWithUrls = {
       name: productName,
       description: description,
       price: price,
       images: parsedImageUrls,
       videos: parsedProductUrls ? parsedProductUrls : videos,
-      albums: cloudAlbums,
-      folders: cloudFolders,
       categories: selectedCategories,
     };
     setProduct(completeProductWithUrls);
-    console.log(completeProductWithUrls);
 
     // Send the completeProductWithUrls to the backend
     axios
@@ -73,6 +66,7 @@ const ProductForm = () => {
         // Handle the response from the backend
         console.log("Product sent successfully:", response.data);
         setLoading(false);
+        router.push("/");
       })
       .catch((error) => {
         // Handle errors
@@ -133,53 +127,12 @@ const ProductForm = () => {
               // Store imageUrls in localStorage
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
               sendProducts();
-              setLoading(false);
-              router.push("/");
             }
           }
           // Modify the sendProducts function
 
           // Call the sendProducts function
         }
-      }
-
-      // Append albums
-      if (audio) {
-        audio.forEach((aud) => {
-          formData.append("files", aud);
-        });
-
-        const audioResponse = await axios.post(
-          "http://localhost:8000/api/v1/audio",
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${JSON.parse(token)}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        setCloudAudio([audioResponse.data]);
-        console.log(cloudAudio);
-      }
-
-      // Append folders
-      if (folders) {
-        folders.forEach((folder) => {
-          formData.append("files", folder);
-        });
-        const folderResponse = await axios.post(
-          "http://localhost:8000/api/v1/upload/folder",
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${JSON.parse(token)}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        setCloudFolders(folderResponse.data);
-        console.log(cloudFolders);
       }
 
       // Set loading state to false after upload
@@ -288,41 +241,6 @@ const ProductForm = () => {
             onChange={(e) => setVideos([...e.target.files])}
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-2 font-bold text-[whitesmoke]">
-            Albums
-          </label>
-          <input
-            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
-            type="file"
-            accept=".zip, audio/*"
-            multiple
-            onChange={(e) => {
-              const selectedFiles = e.target.files;
-              const audioFiles = Array.from(selectedFiles).filter((file) =>
-                file.type.startsWith("audio/")
-              );
-              const zipFiles = Array.from(selectedFiles).filter(
-                (file) => file.type === "application/zip"
-              );
-              setAlbums([...zipFiles]);
-              setAudio([...audioFiles]); // Store selected audio files in the audio state
-              // Process zipFiles as needed
-            }}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 font-bold text-[whitesmoke]">
-            Folders
-          </label>
-          <input
-            className="w-full px-3 py-2 border rounded-md border-purple-400 outline-purple-400"
-            type="file"
-            webkitdirectory=""
-            directory=""
-            onChange={(e) => setFolders([...e.target.files])}
-          />
-        </div>
 
         <div className="mb-4">
           <label className="block mb-2 font-bold text-[whitesmoke]">
@@ -341,74 +259,78 @@ const ProductForm = () => {
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="video"
-                checked={selectedCategories.includes("video")}
-                onChange={() => handleCategoryChange("video")}
+                value="3D"
+                checked={selectedCategories.includes("3D")}
+                onChange={() => handleCategoryChange("3D")}
               />
               <span className="ml-2">3D</span>
             </label>
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="photo"
-                checked={selectedCategories.includes("photo")}
-                onChange={() => handleCategoryChange("photo")}
+                value="Business and Money"
+                checked={selectedCategories.includes("Business and Money")}
+                onChange={() => handleCategoryChange("Business and Money")}
               />
-              <span className="ml-2">Comics and graphic Novels</span>
+              <span className="ml-2">Business and Money</span>
             </label>
-            <label className="inline-flex items-center text-[whitesmoke]">
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="text"
-                checked={selectedCategories.includes("text")}
-                onChange={() => handleCategoryChange("text")}
+                value="Design"
+                checked={selectedCategories.includes("Design")}
+                onChange={() => handleCategoryChange("Design")}
               />
-              <span className="ml-2">Fictin Books</span>
+              <span className="ml-2">Design</span>
             </label>
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
                 value="audio"
-                checked={selectedCategories.includes("audio")}
-                onChange={() => handleCategoryChange("audio")}
+                checked={selectedCategories.includes("Education")}
+                onChange={() => handleCategoryChange("Education")}
               />
-              <span className="ml-2">Films</span>
+              <span className="ml-2">Education</span>
             </label>
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="video"
-                checked={selectedCategories.includes("video")}
-                onChange={() => handleCategoryChange("video")}
+                value="Fitness and Health"
+                checked={selectedCategories.includes("Fitness and Health")}
+                onChange={() => handleCategoryChange("Fitness and Health")}
               />
               <span className="ml-2">Fitness and Health</span>
             </label>
             <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="photo"
-                checked={selectedCategories.includes("photo")}
-                onChange={() => handleCategoryChange("photo")}
+                value="Films"
+                checked={selectedCategories.includes("Films")}
+                onChange={() => handleCategoryChange("Films")}
               />
-              <span className="ml-2">Education</span>
+              <span className="ml-2">Films</span>
             </label>
-            <label className="inline-flex items-center text-[whitesmoke]">
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="text"
-                checked={selectedCategories.includes("text")}
-                onChange={() => handleCategoryChange("text")}
+                value="Fictin Books"
+                checked={selectedCategories.includes("Fictin Books")}
+                onChange={() => handleCategoryChange("Fictin Books")}
               />
-              <span className="ml-2">Design</span>
+              <span className="ml-2">Fictin Books</span>
             </label>
-            <label className="inline-flex items-center text-[whitesmoke]">
+            <label className="inline-flex items-center mr-4 text-[whitesmoke]">
               <input
                 type="checkbox"
-                value="text"
-                checked={selectedCategories.includes("text")}
-                onChange={() => handleCategoryChange("text")}
+                value="Comics and graphic Novels"
+                checked={selectedCategories.includes(
+                  "Comics and graphic Novels"
+                )}
+                onChange={() =>
+                  handleCategoryChange("Comics and graphic Novels")
+                }
               />
-              <span className="ml-2">Business and Money</span>
+              <span className="ml-2">Comics and graphic Novels</span>
             </label>
           </div>
         </div>
@@ -433,8 +355,7 @@ const ProductForm = () => {
               price,
               images,
               videos,
-              albums,
-              folders,
+
               selectedCategories,
             }}
           />
