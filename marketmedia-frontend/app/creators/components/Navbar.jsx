@@ -22,7 +22,7 @@ const NavBar = () => {
     },
     {
       id: 4,
-      link: "discover",
+      link: "product",
     },
   ];
 
@@ -42,14 +42,21 @@ const NavBar = () => {
       </div>
 
       <ul className="hidden md:flex">
-        {links.map(({ id, link }) => (
-          <li
-            key={id}
-            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
-          >
-            {link}
+        <Link href="/product">
+          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            Discover
           </li>
-        ))}
+        </Link>
+
+        <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+          Blog
+        </li>
+        <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+          Pricing
+        </li>
+        <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+          Features
+        </li>
       </ul>
       <ul className="hidden md:flex items-center">
         <Link href="/login">

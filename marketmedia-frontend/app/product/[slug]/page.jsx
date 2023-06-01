@@ -2,16 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import NavBar from "@/app/creators/components/Navbar";
 import Loading from "../components/Loading";
+import Cart from "./components/Cart";
 
-const page = () => {
-  const router = useRouter();
+const Page = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    // Retrieve cart items from localStorage on component mount
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+
     const getProduct = async () => {
       try {
         // Retrieve the slug value from localStorage
@@ -47,15 +54,40 @@ const page = () => {
     getProduct();
   }, []);
 
+  // Function to update the cart
+  const updateCart = () => {
+    const updatedCartItems = [...cartItems, product];
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
+  const removeItem = (item) => {
+    const updatedCartItems = cartItems.filter((cartItem) => cartItem !== item);
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
+  const updateQuantity = (item, quantity) => {
+    const updatedCartItems = cartItems.map((cartItem) => {
+      if (cartItem === item) {
+        return { ...cartItem, quantity: parseInt(quantity) };
+      }
+      return cartItem;
+    });
+
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <div className="h-full w-full  bg-gray-200">
+    <div className="h-full w-full bg-gray-200">
       <NavBar />
-      <div className=" pt-12 h-[85vh] flex flex-col w-[90vw] m-auto gap-4">
-        <div className=" flex-[12] flex justify-center pt-20 h-full overflow-auto no-scrollbar">
+      <div className="pt-12 h-[85vh] flex flex-col w-[90vw] m-auto gap-4">
+        <div className="flex-[12] flex justify-center pt-20 h-full overflow-auto no-scrollbar">
           <div className="flex flex-col items-center">
             <img
               className="rounded-md h-[40%] w-full object-cover"
@@ -77,8 +109,16 @@ const page = () => {
           </div>
         </div>
       </div>
+      <Cart
+        cartItems={cartItems}
+        updateCart={updateCart}
+        removeItem={removeItem}
+        updateQuantity={updateQuantity}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </div>
   );
 };
 
-export default page;
+export default Page;

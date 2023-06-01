@@ -90,7 +90,7 @@ const Categories = () => {
     <section className="min-h-screen">
       {/* Looking for inspiration Section */}
       <div className="container mx-auto py-12">
-        <h2 className="text-3xl text-blue-600 font-bold mb-6  text-center">
+        <h2 className="text-3xl sticky top-0 z-10 text-blue-600 font-bold mb-6  text-center">
           Looking for inspiration on what you can sell?
         </h2>
         <p className="text-lg text-purple-500 mb-8 font-lora text-center">
