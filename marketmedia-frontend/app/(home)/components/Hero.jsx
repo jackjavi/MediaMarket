@@ -21,6 +21,7 @@ const Hero = () => {
         backgroundPosition: "center",
         height: "100%",
         position: "relative",
+        borderRadius: "10px",
       }}
       className="hero  md:block"
     >
@@ -28,7 +29,7 @@ const Hero = () => {
         className="bg-hero-overlay absolute inset-0"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
       ></div>
-      <div className="bg-hero-image h-[85vh] flex justify-center items-center relative">
+      <div className="bg-hero-image h-[85vh] flex justify-center items-center relative rounded-md">
         <div className="text-center text-white">
           <h1 className="text-4xl font-bold mb-4 font-mono sticky top-0 z-10">
             Your One-stop shop for digital media downloads.

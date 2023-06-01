@@ -27,7 +27,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="bg-purple-400 flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
+    <div className="bg-purple-400 rounded-md flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
       <div className="flex ">
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer flex items-center justify-center">
           <Link href="/">

@@ -34,6 +34,24 @@ const Cart = ({
     setShowModal(true);
   };
 
+  // Function to calculate the total quantity in the cart
+  const calculateTotalQuantity = () => {
+    let totalQuantity = 0;
+    for (const item of cartItems) {
+      totalQuantity += item.quantity;
+    }
+    return totalQuantity;
+  };
+
+  // Function to calculate the total price in the cart
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    for (const item of cartItems) {
+      totalPrice += item.quantity * item.price;
+    }
+    return totalPrice;
+  };
+
   return (
     <div className="fixed bottom-0 right-0 m-4 p-4 bg-black shadow-lg rounded-md">
       <h2 className="text-xl font-bold mb-4">Shopping Cart</h2>

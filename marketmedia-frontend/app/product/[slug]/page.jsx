@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "@/app/creators/components/Navbar";
 import Loading from "../components/Loading";
 import Cart from "./components/Cart";
+import Image from "next/image";
 
 const Page = () => {
   const [product, setProduct] = useState(null);
@@ -89,10 +90,12 @@ const Page = () => {
       <div className="pt-12 h-[85vh] flex flex-col w-[90vw] m-auto gap-4">
         <div className="flex-[12] flex justify-center pt-20 h-full overflow-auto no-scrollbar">
           <div className="flex flex-col items-center">
-            <img
-              className="rounded-md h-[40%] w-full object-cover"
-              src={product.images}
-              alt=""
+            <Image
+              className="rounded-md h-[40%] w-full object-cover object-top"
+              src={product.images[0]}
+              alt={product.name}
+              width={200}
+              height={200}
             />
 
             <h4 className="text-center font-lora text-[20px] font-bold cursor-pointer">
