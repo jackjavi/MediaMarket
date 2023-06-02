@@ -71,14 +71,14 @@ const Post = () => {
   };
 
   return (
-    <div className="bg-purple-200 h-[85vh] p-4 rounded-md mt-4">
-      <div ref={featuredSellersRef} className="sticky top-0 z-10 h-[20%]">
+    <div className=" overflow-y-scroll no-scrollbar  px-[10vw] h-full p-4 rounded-md mt-4">
+      {/*<div ref={featuredSellersRef} className="sticky top-0 z-10 h-[20%]">
         <h2 className="text-xl md:text-2xl lg:text-3xl p-4 text-blue-500 text-center font-bold font-lora mb-2">
-          Featured Sellers
+         Featured Sellers
         </h2>
-      </div>
-      <div className="h-[80%] overflow-y-scroll no-scrollbar">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+      </div>*/}
+      <div className="h-[80%] ">
+        <div className="grid grid-cols-1 gap-4">
           {/* Products mapping logic */}
           {products.map((product) => (
             <div

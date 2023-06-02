@@ -1,11 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("token"));
+    if (userToken) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+    // Additional logout logic if needed
+  };
 
   const links = [
     {
@@ -27,11 +43,11 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="bg-purple-400 rounded-md flex  z-10 justify-between items-center w-full h-[15vh] px-[5vw] text-[whitesmoke]fixed">
-      <div className="flex ">
+    <nav className="bg-purple-400 rounded-md flex justify-between items-center w-full h-[15vh]  text-[whitesmoke] px-[5vw] z-10">
+      <div className="flex">
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer flex items-center justify-center">
           <Link href="/">
-            <span className="bg-white rounded-full p-2 text-blue-500 text-base md:text-3xl mr-2 ">
+            <span className="bg-white rounded-full p-2 text-blue-500 text-base md:text-3xl mr-2">
               MM
             </span>
           </Link>
@@ -48,6 +64,12 @@ const NavBar = () => {
           </li>
         </Link>
 
+        <Link href="/dashboard">
+          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            Dashboard
+          </li>
+        </Link>
+
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Blog
         </li>
@@ -58,17 +80,29 @@ const NavBar = () => {
           Features
         </li>
       </ul>
+
       <ul className="hidden md:flex items-center">
-        <Link href="/login">
-          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-            login
+        {loggedIn ? (
+          <li
+            onClick={handleLogout}
+            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+          >
+            Logout
           </li>
-        </Link>
-        <Link href="register">
-          <li className="p-2 rounded-md bg-[whitesmoke] cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-            Sign Up
-          </li>
-        </Link>
+        ) : (
+          <>
+            <Link href="/login">
+              <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+                Login
+              </li>
+            </Link>
+            <Link href="/register">
+              <li className="p-2 rounded-md bg-[whitesmoke] cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+                Sign Up
+              </li>
+            </Link>
+          </>
+        )}
       </ul>
 
       <div
@@ -92,13 +126,13 @@ const NavBar = () => {
                 duration={500}
               >
                 {link}
-          </Link>*/}{" "}
+              </Link>*/}
               {link}
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </nav>
   );
 };
 
