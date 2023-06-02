@@ -29,7 +29,7 @@ Media Market is a web application built with Next.js and Node.js that allows use
 
 To get started with Media Market on your local machine, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/media-market.git`
+1. Clone the repository: `git clone https://github.com/jackjavi/media-market.git`
 2. Navigate to the project directory: `cd media-market`
 3. Install the dependencies: `npm install`
 
@@ -48,7 +48,7 @@ The key technologies and frameworks used in this project are:
 - Node.js: A JavaScript runtime environment for executing server-side code.
 - Express: A fast and minimalist web application framework for Node.js.
 - MongoDB: A NoSQL database for storing and retrieving data.
-- Stripe: A payment processing platform for handling secure online transactions.
+- Paypal: A payment processing platform for handling secure online transactions.
 - Tailwind CSS: A utility-first CSS framework for quickly styling the user interface.
 
 ## Contributing
