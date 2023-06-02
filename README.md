@@ -29,7 +29,7 @@ Media Market is a web application built with Next.js and Node.js that allows use
 
 To get started with Media Market on your local machine, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/media-market.git`
+1. Clone the repository: `git clone https://github.com/jackjavi/media-market.git`
 2. Navigate to the project directory: `cd media-market`
 3. Install the dependencies: `npm install`
 
