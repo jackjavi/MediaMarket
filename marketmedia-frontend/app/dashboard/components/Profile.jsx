@@ -3,18 +3,15 @@
 import React from "react";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
+
 const ProfilePage = () => {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          "https://your-api.com/user/your-user-id"
-        );
-        setUser(response.data);
-      } catch (error) {
-        console.log(error);
+    const fetchUser = () => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser) {
+        setUser(storedUser);
       }
     };
 
@@ -32,7 +29,7 @@ const ProfilePage = () => {
           />
         ) : (
           <div className="bg-blue-500 rounded-t-md w-full h-full flex items-center justify-center">
-            <span>Cover Image</span>
+            <span>Click Edit to Add Cover Image</span>
           </div>
         )}
       </div>
@@ -50,14 +47,25 @@ const ProfilePage = () => {
         </div>
         <div className="mt-2">
           <div>
-            {user && <h1 className="text-2xl font-bold">{user.name}</h1>}
-            {!user && (
+            {user?.name ? (
+              <h1 className="text-2xl font-bold">{user.name}</h1>
+            ) : (
               <h1 className="text-2xl font-bold">Jack Javi [placeholder]</h1>
             )}
           </div>
+          <div>
+            {user?.email ? (
+              <h1 className="text-sm font-bold">{user.email}</h1>
+            ) : (
+              <h1 className="text-sm font-bold">
+                johndoe@gmail.com [placeholder]
+              </h1>
+            )}
+          </div>
 
-          {user && <p> user.description</p>}
-          {!user && (
+          {user?.description ? (
+            <p>{user.description}</p>
+          ) : (
             <div className="py-4">
               <h3 className="font-bold text-xl">About</h3>
               <p className="font-lora leading-6 mt-2">

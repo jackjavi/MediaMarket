@@ -72,7 +72,7 @@ const Settings = () => {
           <span className="font-bold">Edit</span>
         </div>
 
-        <div className="flex gap-4">
+        <div className="md:flex md:gap-4 p-4">
           <div className="flex-[8]">
             {!edit && <Profile />}
             {edit && (

@@ -38,6 +38,7 @@ const page = () => {
         // Perform success logic here
         if (response.data.token) {
           localStorage.setItem("token", JSON.stringify(response.data.token));
+          localStorage.setItem("user", JSON.stringify(response.data.user));
           router.push("/");
         }
       })
