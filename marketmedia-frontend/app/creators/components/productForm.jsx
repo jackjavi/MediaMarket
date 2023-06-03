@@ -17,7 +17,7 @@ const ProductForm = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [loading, setLoading] = useState(false);
 
   const handleCategoryChange = (category) => {
     // Check if the category is already selected
@@ -87,7 +87,6 @@ const ProductForm = () => {
       if (images) {
         images.forEach((image) => {
           formData.append("files", image);
-          console.log(image);
         });
         const imageResponse = await axios.post(
           "http://localhost:8000/api/v1/upload/image",

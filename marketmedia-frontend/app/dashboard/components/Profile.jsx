@@ -35,9 +35,9 @@ const ProfilePage = () => {
       </div>
       <div className="p-4">
         <div className="">
-          {user && user.profilePicture ? (
+          {user && user.profileImage ? (
             <img
-              src={user.profilePicture}
+              src={user.profileImage}
               alt="Profile Picture"
               className="rounded-full w-40 h-40 object-cover"
             />
@@ -63,8 +63,8 @@ const ProfilePage = () => {
             )}
           </div>
 
-          {user?.description ? (
-            <p>{user.description}</p>
+          {user?.about ? (
+            <p>{user.about}</p>
           ) : (
             <div className="py-4">
               <h3 className="font-bold text-xl">About</h3>
