@@ -104,19 +104,21 @@ const NavBar = () => {
             >
               Logout
             </li>
-            <div className="">
-              {user && user.length > 0 ? (
-                <Image
-                  src={user}
-                  height={70}
-                  width={70}
-                  alt="Profile Picture"
-                  className="rounded-full w-16 h-16 object-cover"
-                />
-              ) : (
-                <FaUserCircle size={50} />
-              )}
-            </div>
+            <Link href="/dashboard">
+              <div className="">
+                {user && user.length > 0 ? (
+                  <Image
+                    src={user}
+                    height={70}
+                    width={70}
+                    alt="Profile Picture"
+                    className="rounded-full w-16 h-16 object-cover"
+                  />
+                ) : (
+                  <FaUserCircle size={50} />
+                )}
+              </div>
+            </Link>
           </div>
         ) : (
           <>
