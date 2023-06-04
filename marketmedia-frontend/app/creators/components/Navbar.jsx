@@ -90,7 +90,7 @@ const NavBar = () => {
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Pricing
         </li>
-        <Link href="/product">
+        <Link href="/creators">
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Sell
           </li>
