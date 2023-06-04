@@ -90,9 +90,11 @@ const NavBar = () => {
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Pricing
         </li>
-        <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-          Features
-        </li>
+        <Link href="/product">
+          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+            Sell
+          </li>
+        </Link>
       </ul>
 
       <ul className="hidden md:flex items-center">
