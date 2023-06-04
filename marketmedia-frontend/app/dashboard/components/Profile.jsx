@@ -2,6 +2,7 @@
 
 import React from "react";
 import axios from "axios";
+import Image from "next/image";
 import { FaUserCircle } from "react-icons/fa";
 
 const ProfilePage = () => {
@@ -22,10 +23,12 @@ const ProfilePage = () => {
     <div className="bg-[whitesmoke] rounded-md text-blue-500">
       <div className="w-full h-[40vh] text-[whitesmoke]">
         {user && user.coverImage ? (
-          <img
+          <Image
             src={user.coverImage}
+            height={500}
+            width={500}
             alt="Cover Image"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-t-md"
           />
         ) : (
           <div className="bg-blue-500 rounded-t-md w-full h-full flex items-center justify-center">
@@ -36,8 +39,10 @@ const ProfilePage = () => {
       <div className="p-4">
         <div className="">
           {user && user.profileImage ? (
-            <img
+            <Image
               src={user.profileImage}
+              height={70}
+              width={70}
               alt="Profile Picture"
               className="rounded-full w-40 h-40 object-cover"
             />

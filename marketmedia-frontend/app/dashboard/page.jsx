@@ -7,7 +7,7 @@ import Post from "../(home)/components/post";
 import { FaEdit } from "react-icons/fa";
 import Profile from "./components/Profile";
 import NavBar from "../creators/components/Navbar";
-import Footer from "../(home)/components/Footer copy";
+import Footer from "../(home)/components/Footer";
 import ProductCategories from "../(home)/components/ProductCategories";
 import Image from "next/image";
 import { FaUserCircle } from "react-icons/fa";

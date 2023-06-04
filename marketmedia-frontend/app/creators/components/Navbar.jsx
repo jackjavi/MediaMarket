@@ -2,20 +2,33 @@
 
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("token"));
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
+
     if (userToken) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
+
+    if (parsedUser && parsedUser.profileImage) {
+      setUser(parsedUser.profileImage);
+    }
   }, []);
+
+  if (user && user.length > 0) {
+    console.log(user);
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -84,12 +97,27 @@ const NavBar = () => {
 
       <ul className="hidden md:flex items-center">
         {loggedIn ? (
-          <li
-            onClick={handleLogout}
-            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
-          >
-            Logout
-          </li>
+          <div className="flex justify-center items-center">
+            <li
+              onClick={handleLogout}
+              className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+            >
+              Logout
+            </li>
+            <div className="">
+              {user && user.length > 0 ? (
+                <Image
+                  src={user}
+                  height={70}
+                  width={70}
+                  alt="Profile Picture"
+                  className="rounded-full w-16 h-16 object-cover"
+                />
+              ) : (
+                <FaUserCircle size={50} />
+              )}
+            </div>
+          </div>
         ) : (
           <>
             <Link href="/login">
