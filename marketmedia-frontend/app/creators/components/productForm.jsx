@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Preview from "./Preview";
 import { router } from "next/navigation";
+import { FaToggleOff } from "react-icons/fa";
+import { FaToggleOn } from "react-icons/fa";
 
 const ProductForm = () => {
   const [productName, setProductName] = useState("");
@@ -18,6 +20,15 @@ const ProductForm = () => {
   const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
+
+  const setProductPrice = () => {
+    if (toggle) {
+      setPrice("0");
+    } else {
+      setPrice("");
+    }
+  };
 
   const handleCategoryChange = (category) => {
     // Check if the category is already selected
@@ -80,6 +91,7 @@ const ProductForm = () => {
 
     try {
       setLoading(true);
+      setProductPrice();
       const token = localStorage.getItem("token");
       const formData = new FormData();
 
@@ -212,7 +224,29 @@ const ProductForm = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
+            disabled={toggle} // Disable the input when toggle is on
           />
+
+          <div className="relative h-6 ">
+            <div>
+              <span className="absolute bottom-0">
+                {toggle ? (
+                  <FaToggleOn
+                    onClick={() => setToggle((prev) => !prev)}
+                    size={20}
+                    color="teal"
+                  />
+                ) : (
+                  <FaToggleOff
+                    onClick={() => setToggle((prev) => !prev)}
+                    size={20}
+                    color="purple"
+                  />
+                )}
+              </span>
+            </div>
+            <div className="ml-8 text-purple-500">Set free</div>
+          </div>
         </div>
         <div className="mb-4">
           <label className="block mb-2 font-bold text-[whitesmoke]">

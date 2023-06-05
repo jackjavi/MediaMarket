@@ -20,9 +20,17 @@ const createProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const products = await Product.find({ createdBy: req.user.userId }).sort(
-    "createdAt"
-  );
+  const { name, categories } = req.query;
+  let queryObject = {};
+
+  if (categories) {
+    queryObject.categories = categories;
+  }
+
+  if (name) {
+    queryObject.name = name;
+  }
+  const products = await Product.find(queryObject).sort("-createdAt");
   res.status(StatusCodes.OK).json({ products, count: products.length });
 };
 
