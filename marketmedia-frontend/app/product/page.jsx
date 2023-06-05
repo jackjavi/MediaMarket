@@ -14,10 +14,17 @@ const Products = () => {
   const featuredSellersRef = useRef(null);
   const [category, setCategory] = useState(null);
 
+  console.log(router.query);
+
   useEffect(() => {
     const fetchProducts = async () => {
       // Fetch products logic
       try {
+        const query = JSON.parse(localStorage.getItem("query"));
+        if (query) {
+          setCategory(query);
+          localStorage.removeItem("query");
+        }
         const token = localStorage.getItem("token");
         if (!token) {
           // Redirect or handle the case when the token is not available
