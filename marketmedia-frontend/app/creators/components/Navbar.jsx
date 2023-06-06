@@ -40,7 +40,7 @@ const NavBar = () => {
   const links = [
     {
       id: 1,
-      link: "pricing",
+      link: "buy",
     },
     {
       id: 2,
@@ -61,12 +61,12 @@ const NavBar = () => {
       <div className="flex items-center justify-center">
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer flex items-center justify-center">
           <Link href="/">
-            <span className="bg-purple-300 rounded-full p-2 text-blue-500  md:text-3xl mr-2">
+            <span className="bg-purple-300 rounded-full p-2 text-[teal] lg:text-5xl mr-2">
               MM
             </span>
           </Link>
         </h1>
-        <h1 className="text-5xl text-[teal] hidden md:flex font-bold font-signature ml-2 cursor-pointer">
+        <h1 className="text-5xl text-[whitesmoke] hidden md:flex font-bold font-signature ml-2 cursor-pointer">
           <Link href="/">
             <span>MEDIA MARKET</span>
           </Link>
@@ -90,7 +90,7 @@ const NavBar = () => {
           Blog
         </li>
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-          Pricing
+          Buy
         </li>
         <Link href="/creators">
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
