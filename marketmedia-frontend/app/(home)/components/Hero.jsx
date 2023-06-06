@@ -36,7 +36,7 @@ const Hero = () => {
           </h1>
           <p className="text-xl font-lora">
             Empower yourself by creating and selling unique digital products.
-            Let's go and make something awesome!
+            Let&apos;s go and make something awesome!
           </p>
           <button
             onClick={handleButtonClick}

@@ -151,7 +151,7 @@ const Page = () => {
       <Cart
         cartItems={cartItems}
         product={product}
-        setCartItems={...setCartItems}
+        setCartItems={setCartItems}
         removeItem={removeItem}
         updateQuantity={updateQuantity}
         showModal={showModal}

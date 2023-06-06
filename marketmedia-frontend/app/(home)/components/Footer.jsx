@@ -80,7 +80,7 @@ const Footer = () => {
           <span>8:00am to 5:00pm EAT</span>
           <Link href="/chat">
             <button className="font-shock bg-blue-400 px-4 py-2 text-lg text-white rounded-md hover:bg-amber-300">
-              Let's Chat
+              Let&apos;s Chat
             </button>
           </Link>
         </div>

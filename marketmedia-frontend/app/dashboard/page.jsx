@@ -176,7 +176,7 @@ const Settings = () => {
                     <div className="flex items-center my-[10px] h-[40vh] w-full">
                       {coverFile && coverFile.length > 0 ? (
                         coverFile.map((file, index) => (
-                          <img
+                          <Image
                             key={index}
                             src={URL.createObjectURL(file)}
                             alt=""
@@ -222,7 +222,7 @@ const Settings = () => {
                     <div className="flex items-center my-[10px]">
                       {profileFile.length > 0 ? (
                         profileFile.map((file, index) => (
-                          <img
+                          <Image
                             key={index}
                             src={URL.createObjectURL(file)}
                             alt=""
