@@ -22,7 +22,7 @@ const page = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/auth/register",
+        "https://www.jackjavi.tech/api/v1/auth/register",
         user
       );
 

@@ -28,7 +28,7 @@ const page = () => {
 
     // Perform login logic here
     const token = localStorage.getItem("token");
-    const url = "http://localhost:8000/api/v1/auth/login";
+    const url = "https://www.jackjavi.tech/api/v1/auth/login";
 
     axios
       .post(url, credentials, {
@@ -45,7 +45,7 @@ const page = () => {
         }
       })
       .catch((error) => {
-        console.error("Registration failed:", error);
+        console.error("Login failed:", error);
         // Perform error logic here
       });
   };

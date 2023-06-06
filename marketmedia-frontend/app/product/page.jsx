@@ -34,9 +34,9 @@ const Products = () => {
 
         let url;
         if (category && category != "All") {
-          url = `http://localhost:8000/api/v1/products?categories=${category}`;
+          url = `https://www.jackjavi.tech/api/v1/products?categories=${category}`;
         } else {
-          url = `http://localhost:8000/api/v1/products`;
+          url = `https://www.jackjavi.tech/api/v1/products`;
         }
         axios
           .get(url, {
