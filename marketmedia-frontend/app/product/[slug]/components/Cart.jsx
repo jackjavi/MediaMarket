@@ -38,7 +38,9 @@ const Cart = ({
   const calculateTotalQuantity = () => {
     let totalQuantity = 0;
     for (const item of cartItems) {
-      totalQuantity += item.quantity;
+      if (item && item.quantity) {
+        totalQuantity += item.quantity;
+      }
     }
     return totalQuantity;
   };
@@ -47,7 +49,9 @@ const Cart = ({
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     for (const item of cartItems) {
-      totalPrice += item.quantity * item.price;
+      if (item && item.quantity && item.price) {
+        totalPrice += item.quantity * item.price;
+      }
     }
     return totalPrice;
   };
@@ -58,25 +62,29 @@ const Cart = ({
       <div onClick={updateCart}>
         <FaShoppingCart />
       </div>
-      {cartItems.length === 0 ? (
+      {cartItems && cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <ul className="space-y-2">
-          {cartItems.map((item, index) => (
-            <li key={index} className="flex items-center">
-              <span className="mr-2">{item.name}</span>
-              <button onClick={() => handleDecreaseQuantity(item)}>
-                <FaMinus />
-              </button>
-              <span>{item.quantity}</span>
-              <button onClick={() => handleIncreaseQuantity(item)}>
-                <FaPlus />
-              </button>
-              <FaTimes onClick={() => handleRemoveItem(item)} />
-            </li>
-          ))}
+          {cartItems.map(
+            (item, index) =>
+              item && (
+                <li key={index} className="flex items-center">
+                  <span className="mr-2">{item.name}</span>
+                  <button onClick={() => handleDecreaseQuantity(item)}>
+                    <FaMinus />
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => handleIncreaseQuantity(item)}>
+                    <FaPlus />
+                  </button>
+                  <FaTimes onClick={() => handleRemoveItem(item)} />
+                </li>
+              )
+          )}
         </ul>
       )}
+
       <button onClick={handleCheckout} className="btn-checkout">
         Checkout
       </button>

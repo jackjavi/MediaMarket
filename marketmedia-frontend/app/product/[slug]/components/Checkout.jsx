@@ -24,11 +24,18 @@ const Checkout = ({ cartItems }) => {
       <h2>Checkout</h2>
       {/* Display the summary of items */}
       <ul>
-        {cartItems.map((item, index) => (
-          <li key={index}>
-            {item.name} - Quantity: {item.quantity}
-          </li>
-        ))}
+        {cartItems && cartItems.length > 0 && (
+          <ul>
+            {cartItems.map(
+              (item, index) =>
+                item && (
+                  <li key={index}>
+                    {item.name} - Quantity: {item.quantity}
+                  </li>
+                )
+            )}
+          </ul>
+        )}
       </ul>
       <p>Total Quantity: {calculateTotalQuantity()}</p>
       <p>Total Price: {calculateTotalPrice()}</p>

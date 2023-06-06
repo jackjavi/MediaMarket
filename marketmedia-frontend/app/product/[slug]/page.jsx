@@ -57,9 +57,24 @@ const Page = () => {
 
   // Function to update the cart
   const updateCart = () => {
-    const updatedCartItems = [...cartItems, product];
-    setCartItems(updatedCartItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    if (product) {
+      const itemExists = cartItems.some((item) => item.id === product.id);
+
+      if (itemExists) {
+        const updatedCartItems = cartItems.map((item) => {
+          if (item.id === product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        });
+        setCartItems(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      } else {
+        const updatedCartItems = [...cartItems, { ...product, quantity: 1 }];
+        setCartItems(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      }
+    }
   };
 
   const removeItem = (item) => {
@@ -90,24 +105,26 @@ const Page = () => {
       <div className="pt-12 h-[85vh] flex flex-col w-[90vw] m-auto gap-4">
         <div className="flex-[12] flex justify-center pt-20 h-full overflow-auto no-scrollbar">
           <div className="flex flex-col items-center">
-            <Image
-              className="rounded-md h-[40%] w-full object-cover object-top"
-              src={product.images[0]}
-              alt={product.name}
-              width={200}
-              height={200}
-            />
+            {product && product.images && product.images.length > 0 && (
+              <Image
+                className="rounded-md h-[40%] w-full object-cover object-top"
+                src={product.images[0]}
+                alt={product.name}
+                width={200}
+                height={200}
+              />
+            )}
 
             <h4 className="text-center font-lora text-[20px] font-bold cursor-pointer">
-              {product.name}
+              {product && product.name}
             </h4>
 
             <p className="py-4 gap-20 text-[16px] font-valera text-[#b39656]">
-              Author: <b>{product.createdBy}</b>
+              Author: <b>{product && product.createdBy}</b>
             </p>
 
             <p className="font-lora text-[16px] w-[90%] md:w-[50%] leading-8 text-[#666] first-letter:text-[30px] first-letter:ml-[20px] first-letter:font-semibold">
-              {product.description}
+              {product && product.description}
             </p>
           </div>
         </div>
