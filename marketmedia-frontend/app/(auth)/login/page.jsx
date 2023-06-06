@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import NavBar from "@/app/creators/components/Navbar";
+import Footer from "@/app/(home)/components/Footer";
 
 const page = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -96,6 +97,7 @@ const page = () => {
           </div>
         </form>
       </main>
+      <Footer />
     </div>
   );
 };
