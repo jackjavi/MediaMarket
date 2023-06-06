@@ -6,7 +6,7 @@ import ProductCategories from "./components/ProductCategories";
 import Categories from "./components/Categories";
 import Footer from "./components/Footer";
 
-const page = () => {
+const Home = () => {
   return (
     <div className="container mx-auto">
       <NavBar />
@@ -26,4 +26,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Home;

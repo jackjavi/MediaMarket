@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import NavBar from "@/app/creators/components/Navbar";
 import Footer from "@/app/(home)/components/Footer";
 
-const page = () => {
+const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const router = useRouter();
 
@@ -102,4 +102,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;
