@@ -55,28 +55,6 @@ const Page = () => {
     getProduct();
   }, []);
 
-  // Function to update the cart
-  const updateCart = () => {
-    if (product) {
-      const itemExists = cartItems.some((item) => item.id === product.id);
-
-      if (itemExists) {
-        const updatedCartItems = cartItems.map((item) => {
-          if (item.id === product.id) {
-            return { ...item, quantity: item.quantity + 1 };
-          }
-          return item;
-        });
-        setCartItems(updatedCartItems);
-        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-      } else {
-        const updatedCartItems = [...cartItems, { ...product, quantity: 1 }];
-        setCartItems(updatedCartItems);
-        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-      }
-    }
-  };
-
   const removeItem = (item) => {
     const updatedCartItems = cartItems.filter((cartItem) => cartItem !== item);
     setCartItems(updatedCartItems);
@@ -93,6 +71,22 @@ const Page = () => {
 
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
+  const handleDownload = (fileUrl) => {
+    // Perform download logic here
+    // For example, you can create a download link and simulate a click to trigger the download
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = getFileNameFromUrl(fileUrl); // Extract the filename from the URL
+    link.target = "_blank";
+    link.click();
+  };
+
+  const getFileNameFromUrl = (url) => {
+    const startIndex = url.lastIndexOf("/") + 1;
+    const filename = url.substr(startIndex);
+    return decodeURIComponent(filename);
   };
 
   if (loading) {
@@ -126,18 +120,70 @@ const Page = () => {
             <p className="font-lora text-[16px] w-[90%] md:w-[50%] leading-8 text-[#666] first-letter:text-[30px] first-letter:ml-[20px] first-letter:font-semibold">
               {product && product.description}
             </p>
+
+            {product && product.videos && product.videos.length > 0 && (
+              <div className="mt-8">
+                <h4 className="text-center font-lora text-[20px] font-bold cursor-pointer">
+                  Files
+                </h4>
+                <div className="flex flex-wrap justify-center gap-4 mt-4">
+                  {product.videos.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center bg-purple-400 rounded-md p-4"
+                    >
+                      {getFileIcon(file.type)}
+                      <p>{file.type}</p>
+                      <button
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                        onClick={() => handleDownload(file)}
+                      >
+                        Download
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
       <Cart
         cartItems={cartItems}
-        updateCart={updateCart}
+        product={product}
+        setCartItems={...setCartItems}
         removeItem={removeItem}
         updateQuantity={updateQuantity}
         showModal={showModal}
         setShowModal={setShowModal}
       />
     </div>
+  );
+};
+
+const getFileIcon = (fileType) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="w-12 h-12 object-contain"
+      alt={fileType}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="2" x2="12" y2="6" />
+      <line x1="12" y1="18" x2="12" y2="22" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="2" y1="12" x2="6" y2="12" />
+      <line x1="18" y1="12" x2="22" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
   );
 };
 

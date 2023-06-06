@@ -5,12 +5,33 @@ import Checkout from "./Checkout";
 
 const Cart = ({
   cartItems,
-  updateCart,
+  setCartItems,
+  product,
   removeItem,
   updateQuantity,
   showModal,
   setShowModal,
 }) => {
+  const updateCart = () => {
+    if (product) {
+      const itemExists = cartItems.some((item) => item._id === product._id);
+
+      if (itemExists) {
+        const updatedCartItems = cartItems.map((item) => {
+          if (item._id === product._id) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        });
+        setCartItems(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      } else {
+        const updatedCartItems = [...cartItems, { ...product, quantity: 1 }];
+        setCartItems(updatedCartItems);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      }
+    }
+  };
   const handleRemoveItem = (item) => {
     removeItem(item);
   };

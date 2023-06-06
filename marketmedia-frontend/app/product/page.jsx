@@ -131,7 +131,7 @@ const Products = () => {
                       </p>
 
                       <p className="mt-2 text-[whitesmoke]  font-lora italic text-sm">
-                        {product.price}
+                        {product.price || "Free"}
                       </p>
                     </div>
 
