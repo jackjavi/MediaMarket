@@ -60,7 +60,7 @@ const Settings = () => {
     const userId = JSON.parse(localStorage.getItem("user"))._id;
     axios
       .patch(
-        `http://localhost:8000/api/v1/auth/update/${userId}`,
+        `https://www.jackjavi.tech/api/v1/auth/update/${userId}`,
         myUpdatedUser,
         {
           headers: {
@@ -96,7 +96,7 @@ const Settings = () => {
           formData.append("files", file);
         });
         const coverfileResponse = await axios.post(
-          "http://localhost:8000/api/v1/upload/image",
+          "https://www.jackjavi.tech/api/v1/upload/image",
           formData,
           {
             headers: {
@@ -120,7 +120,7 @@ const Settings = () => {
           formData.append("files", file);
         });
         const profilefileResponse = await axios.post(
-          "http://localhost:8000/api/v1/upload/image",
+          "https://www.jackjavi.tech/api/v1/upload/image",
           formData,
           {
             headers: {

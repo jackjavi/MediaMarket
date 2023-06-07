@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import NavBar from "@/app/creators/components/Navbar";
+import Footer from "@/app/(home)/components/Footer";
 
 const page = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -27,7 +28,7 @@ const page = () => {
 
     // Perform login logic here
     const token = localStorage.getItem("token");
-    const url = "http://localhost:8000/api/v1/auth/login";
+    const url = "https://www.jackjavi.tech/api/v1/auth/login";
 
     axios
       .post(url, credentials, {
@@ -44,7 +45,7 @@ const page = () => {
         }
       })
       .catch((error) => {
-        console.error("Registration failed:", error);
+        console.error("Login failed:", error);
         // Perform error logic here
       });
   };
@@ -96,6 +97,7 @@ const page = () => {
           </div>
         </form>
       </main>
+      <Footer />
     </div>
   );
 };

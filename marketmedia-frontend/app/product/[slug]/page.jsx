@@ -36,7 +36,7 @@ const Page = () => {
           // Redirect or handle the case when the token is not available
           return;
         }
-        const url = `http://localhost:8000/api/v1/products/${slug}`;
+        const url = `https://www.jackjavi.tech/api/v1/products/${slug}`;
 
         // Fetch the product from the backend using the slug
         const res = await axios.get(url, {

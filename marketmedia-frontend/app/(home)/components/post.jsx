@@ -7,9 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Post = () => {
-  const router = useRouter();
   const [products, setProducts] = useState([]);
-  const featuredSellersRef = useRef(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,7 +19,7 @@ const Post = () => {
           return;
         }
 
-        const url = "http://localhost:8000/api/v1/products";
+        const url = "https://www.jackjavi.tech/api/v1/products";
 
         axios
           .get(url, {

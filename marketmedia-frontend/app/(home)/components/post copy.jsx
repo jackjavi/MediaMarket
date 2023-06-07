@@ -2,12 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
 const Post = () => {
-  const router = useRouter();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -19,7 +17,7 @@ const Post = () => {
           return;
         }
 
-        const url = "http://localhost:8000/api/v1/products";
+        const url = "https://www.jackjavi.tech/api/v1/products";
 
         axios
           .get(url, {

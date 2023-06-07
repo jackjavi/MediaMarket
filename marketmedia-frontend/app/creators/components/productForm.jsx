@@ -68,11 +68,15 @@ const ProductForm = () => {
 
     // Send the completeProductWithUrls to the backend
     axios
-      .post("http://localhost:8000/api/v1/products", completeProductWithUrls, {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-        },
-      })
+      .post(
+        "https://www.jackjavi.tech/api/v1/products",
+        completeProductWithUrls,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        }
+      )
       .then((response) => {
         // Handle the response from the backend
         console.log("Product sent successfully:", response.data);
@@ -101,7 +105,7 @@ const ProductForm = () => {
           formData.append("files", image);
         });
         const imageResponse = await axios.post(
-          "http://localhost:8000/api/v1/upload/image",
+          "https://www.jackjavi.tech/api/v1/upload/image",
           formData,
           {
             headers: {
@@ -124,7 +128,7 @@ const ProductForm = () => {
             });
 
             const videoResponse = await axios.post(
-              "http://localhost:8000/api/v1/video",
+              "https://www.jackjavi.tech/api/v1/video",
               formData,
               {
                 headers: {
