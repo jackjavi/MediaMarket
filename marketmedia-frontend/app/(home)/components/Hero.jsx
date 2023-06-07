@@ -1,12 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { lora, mono } from "../../fonts/fonts";
 
 const Hero = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = [
+    "/mediamarketHero1.jpg",
+    "/mediamarketHero2.jpg",
+    "/mediamarketHero3.jpg",
+    "/mediamarketHero4.jpg",
+    "/mediamarketHero5.jpg",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleButtonClick = () => {
     setIsLoading(true);
@@ -16,14 +31,15 @@ const Hero = () => {
   return (
     <section
       style={{
-        backgroundImage: `url('/mediamarketHero.jpg')`,
+        backgroundImage: `url('${images[currentImageIndex]}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100%",
         position: "relative",
         borderRadius: "10px",
+        transition: "background-image 1.5s ease-in-out",
       }}
-      className="hero  md:block"
+      className="hero md:block"
     >
       <div
         className="bg-hero-overlay absolute inset-0"
