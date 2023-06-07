@@ -11,7 +11,7 @@ const Hero = () => {
     "/mediamarketHero2.jpg",
     "/mediamarketHero3.jpg",
     "/mediamarketHero4.jpg",
-    "/mediamarketHero1.jpg",
+
     "/mediamarketHero5.jpg",
   ];
 
@@ -47,10 +47,10 @@ const Hero = () => {
       ></div>
       <div className="bg-hero-image h-[85vh] flex justify-center items-center relative rounded-md">
         <div className="text-center text-white">
-          <h1 className="text-4xl font-bold mb-4 font-mono sticky top-0 z-0">
+          <h1 className="text-4xl font-bold mb-4 font-lora text-white sticky top-0 z-0">
             Your One-stop shop for digital media downloads.
           </h1>
-          <p className="text-xl font-lora">
+          <p className="text-xl text-white font-lora">
             Empower yourself by creating and selling unique digital products.
             Let&apos;s go and make something awesome!
           </p>
