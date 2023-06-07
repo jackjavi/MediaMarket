@@ -1,0 +1,17 @@
+<svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 200 40"
+              width="250"
+              height="50"
+            >
+              <text
+                x="0"
+                y="30"
+                font-size="20"
+                fill="purple"
+                font-family="Arial, sans-serif"
+                font-weight="bold"
+              >
+                MEDIA MARKET
+              </text>
+            </svg>

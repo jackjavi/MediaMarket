@@ -61,14 +61,43 @@ const NavBar = () => {
       <div className="flex items-center justify-center">
         <h1 className="text-5xl font-bold font-signature ml-2 cursor-pointer flex items-center justify-center">
           <Link href="/">
-            <span className="bg-purple-300 rounded-full p-2 text-[teal] lg:text-5xl mr-2">
-              MM
-            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 200 200"
+              width="200"
+              height="200"
+            >
+              <path
+                d="M45 110C45 90 60 75 80 75C100 75 115 90 115 110V135H85V110H95V105C95 100 91 95 86 95C81 95 77 100 77 105V110H45V135H75V110H45Z"
+                fill="purple"
+              />
+              <path
+                d="M135 110C135 90 120 75 100 75C80 75 65 90 65 110V135H95V110H85V105C85 100 89 95 94 95C99 95 103 100 103 105V110H135V135H105V110H135Z"
+                fill="purple"
+              />
+              <path d="M75 125H125V135H75V125Z" fill="white" />
+            </svg>
           </Link>
         </h1>
-        <h1 className="text-5xl text-[whitesmoke] hidden md:flex font-bold font-signature ml-2 cursor-pointer">
+        <h1 className=" text-[whitesmoke] hidden md:flex font-bold font-signature cursor-pointer">
           <Link href="/">
-            <span>MEDIA MARKET</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 200 40"
+              width="250"
+              height="50"
+            >
+              <text
+                x="0"
+                y="30"
+                font-size="20"
+                fill="purple"
+                font-family="Arial, sans-serif"
+                font-weight="bold"
+              >
+                MEDIA MARKET
+              </text>
+            </svg>
           </Link>
         </h1>
       </div>
