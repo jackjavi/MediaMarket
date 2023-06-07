@@ -36,7 +36,6 @@ const Hero = () => {
         backgroundPosition: "center",
         height: "100%",
         position: "relative",
-        borderRadius: "10px",
         transition: "background-image 1.5s ease-in-out",
       }}
       className="hero md:block"
@@ -46,11 +45,11 @@ const Hero = () => {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
       ></div>
       <div className="bg-hero-image h-[85vh] flex justify-center items-center relative rounded-md">
-        <div className="text-center text-white">
-          <h1 className="text-4xl font-bold mb-4 font-lora text-white sticky top-0 z-0">
+        <div className="text-center text-white px-2">
+          <h1 className="text-2xl md:text-4xl font-bold mb-4 font-lora text-white sticky top-0 z-0">
             Your One-stop shop for digital media downloads.
           </h1>
-          <p className="text-xl text-white font-lora">
+          <p className="text-md md:text-xl text-white font-lora">
             Empower yourself by creating and selling unique digital products.
             Let&apos;s go and make something awesome!
           </p>
