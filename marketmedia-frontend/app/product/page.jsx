@@ -88,7 +88,7 @@ const Products = () => {
   return (
     <div className="container mx-auto">
       <NavBar />
-      <main className=" h-screen px-[5rem]  ">
+      <main className=" h-screen md:px-[5rem]  px-4">
         <div ref={featuredSellersRef} className="sticky top-0 z-10 h-[20vh]">
           <CategoriesComponent setCategory={setCategory} />
         </div>
