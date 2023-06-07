@@ -8,17 +8,17 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
-    "/mediamarketHero1.jpg",
     "/mediamarketHero2.jpg",
     "/mediamarketHero3.jpg",
     "/mediamarketHero4.jpg",
+    "/mediamarketHero1.jpg",
     "/mediamarketHero5.jpg",
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
+    }, 20000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
