@@ -89,7 +89,7 @@ const Products = () => {
     <div className="container mx-auto">
       <NavBar />
       <main className=" h-screen md:px-[5rem]  px-4">
-        <div ref={featuredSellersRef} className="sticky top-0 z-10 h-[20vh]">
+        <div ref={featuredSellersRef} className="sticky top-0 z-10  h-[20vh]">
           <CategoriesComponent setCategory={setCategory} />
         </div>
         <div className="h-[80vh] overflow-y-scroll no-scrollbar">

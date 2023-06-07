@@ -25,7 +25,7 @@ const CategoriesComponent = ({ setCategory }) => {
     return colors[randomIndex];
   };
   return (
-    <div className="text-md md:text-lg font-bold h-full w-full flex flex-wrap items-center justify-between gap-2">
+    <div className="text-sm sm:text-md md:text-lg font-bold h-full w-full flex flex-wrap items-center justify-between gap-2">
       <button
         style={{ color: getRandomColor() }}
         onClick={() => handleCategory("All")}
