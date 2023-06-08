@@ -7,6 +7,8 @@ const Hero = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const images = [
     "/mediamarketHero2.jpg",
     "/mediamarketHero3.jpg",
@@ -25,7 +27,15 @@ const Hero = () => {
 
   const handleButtonClick = () => {
     setIsLoading(true);
-    router.push("/creators");
+    const userToken = JSON.parse(localStorage.getItem("token"));
+
+    if (userToken) {
+      setLoggedIn(true);
+      router.push("/creators");
+    } else {
+      setLoggedIn(false);
+      router.push("/register");
+    }
   };
 
   return (
