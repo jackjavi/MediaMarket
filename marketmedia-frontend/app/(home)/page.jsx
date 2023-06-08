@@ -18,13 +18,19 @@ const Home = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="400"
-              height="300"
+              height="200"
               viewBox="0 0 50 300"
             >
               <defs>
                 <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#ff0080" stop-opacity="1" />
-                  <stop offset="100%" stop-color="#8000ff" stop-opacity="1" />
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#ff0080", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#8000ff", stopOpacity: 1 }}
+                  />
                 </linearGradient>
                 <pattern
                   id="pattern"
@@ -49,7 +55,7 @@ const Home = () => {
                 dominant-baseline="middle"
                 text-anchor="middle"
                 fill="#fff"
-                font-size="25"
+                font-size="32"
                 font-family="Arial, sans-serif"
                 font-weight="bold"
                 stroke="#000"
