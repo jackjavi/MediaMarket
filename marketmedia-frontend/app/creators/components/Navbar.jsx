@@ -112,13 +112,13 @@ const NavBar = () => {
       </div>
 
       <ul className="hidden md:flex">
-        <Link href="/product">
+        <Link href={user ? "/product" : "/register"}>
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Discover
           </li>
         </Link>
 
-        <Link href="/dashboard">
+        <Link href={user ? "/dashboard" : "/register"}>
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Dashboard
           </li>
@@ -130,7 +130,7 @@ const NavBar = () => {
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Buy
         </li>
-        <Link href="/creators">
+        <Link href={user ? "/creators" : "/register"}>
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Sell
           </li>
@@ -187,17 +187,30 @@ const NavBar = () => {
 
       {nav && (
         <ul className="flex flex-col justify-center items-center absolute top-0 left-0 z-50 w-full h-screen bg-gray-200 text-gray-700">
-          {links.map(({ id, link, href }) => (
-            <li
-              key={id}
-              className="px-4 cursor-pointer capitalize py-6 text-2xl sm:text-3xl md:text-4xl shadow-md  w-full"
+          <li className="px-4 cursor-pointer capitalize py-6 text-2xl sm:text-3xl md:text-4xl shadow-md  w-full">
+            <Link
+              onClick={() => setNav(!nav)}
+              href={user ? "/product" : "/register"}
             >
-              <Link onClick={() => setNav(!nav)} href={href}>
-                {link}
-              </Link>
-              {link}
-            </li>
-          ))}
+              Discover
+            </Link>
+          </li>
+          <li className="px-4 cursor-pointer capitalize py-6 text-2xl sm:text-3xl md:text-4xl shadow-md  w-full">
+            <Link
+              onClick={() => setNav(!nav)}
+              href={user ? "/dashboard" : "/register"}
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li className="px-4 cursor-pointer capitalize py-6 text-2xl sm:text-3xl md:text-4xl shadow-md  w-full">
+            <Link
+              onClick={() => setNav(!nav)}
+              href={user ? "/creators" : "/register"}
+            >
+              Sell
+            </Link>
+          </li>
         </ul>
       )}
     </nav>
