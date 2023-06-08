@@ -112,7 +112,7 @@ const Categories = () => {
           Looking for inspiration on what you can sell?
         </h2>
         <p className="text-lg text-purple-500 mb-8 font-lora text-center">
-          Discover the best-selling products and creators on MarketMedia.
+          Discover the best-selling products and creators on Media Market.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

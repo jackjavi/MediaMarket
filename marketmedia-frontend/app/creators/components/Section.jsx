@@ -25,14 +25,20 @@ const Section = () => {
           <div className="mt-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="300"
+              width="400"
               height="200"
-              viewBox="0 0 300 200"
+              viewBox="0 0 50 300"
             >
               <defs>
                 <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#9C00FF" stop-opacity="1" />
-                  <stop offset="100%" stop-color="#00B4FF" stop-opacity="1" />
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#ff0080", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#8000ff", stopOpacity: 1 }}
+                  />
                 </linearGradient>
                 <pattern
                   id="pattern"
@@ -44,48 +50,22 @@ const Section = () => {
                 >
                   <image
                     href="https://example.com/path/to/image.jpg"
-                    width="300"
-                    height="200"
+                    width="400"
+                    height="300"
                   />
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#grad)" />
-              <circle cx="300" cy="200" r="160" fill="url(#pattern)" />
+              <circle cx="200" cy="150" r="100" fill="url(#pattern)" />
               <text
                 x="50%"
-                y="40%"
-                dominant-baseline="middle"
-                text-anchor="middle"
+                y="50%"
+                dominantBaseline="middle"
+                textAnchor="middle"
                 fill="#fff"
-                font-size="48"
-                font-family="Arial, sans-serif"
-                transform="rotate(-15 300 200)"
+                fontSize="32"
               >
-                One Stop
-              </text>
-              <text
-                x="50%"
-                y="55%"
-                dominant-baseline="middle"
-                text-anchor="middle"
-                fill="#fff"
-                font-size="48"
-                font-family="Arial, sans-serif"
-                transform="rotate(15 300 200)"
-              >
-                Shop
-              </text>
-              <text
-                x="50%"
-                y="70%"
-                dominant-baseline="middle"
-                text-anchor="middle"
-                fill="#fff"
-                font-size="28"
-                font-family="Arial, sans-serif"
-                transform="rotate(0 300 200)"
-              >
-                for Digital Downloads
+                Create Something Beautiful
               </text>
             </svg>
           </div>

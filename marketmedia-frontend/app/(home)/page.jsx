@@ -14,7 +14,51 @@ const Home = () => {
         <Hero />
 
         <div className="h-screen pt-8 grid grid-cols-1 md:grid-cols-4 gap-4 px-[5vw] border-b-2 shadow-lg shadow-purple-800 border-b-purple-900">
-          <div className="md:col-span-3">{/*<Post />*/}</div>
+          <div className="md:col-span-3 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="400"
+              height="300"
+              viewBox="0 0 50 300"
+            >
+              <defs>
+                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ff0080" stop-opacity="1" />
+                  <stop offset="100%" stop-color="#8000ff" stop-opacity="1" />
+                </linearGradient>
+                <pattern
+                  id="pattern"
+                  x="0"
+                  y="0"
+                  width="100%"
+                  height="100%"
+                  patternUnits="objectBoundingBox"
+                >
+                  <image
+                    href="https://example.com/path/to/image.jpg"
+                    width="400"
+                    height="300"
+                  />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grad)" />
+              <circle cx="200" cy="150" r="100" fill="url(#pattern)" />
+              <text
+                x="50%"
+                y="50%"
+                dominant-baseline="middle"
+                text-anchor="middle"
+                fill="#fff"
+                font-size="25"
+                font-family="Arial, sans-serif"
+                font-weight="bold"
+                stroke="#000"
+                stroke-width="1"
+              >
+                Create Something Beautiful
+              </text>
+            </svg>
+          </div>
           <div className="md:col-span-1 pt-4 ">
             <ProductCategories />
           </div>
