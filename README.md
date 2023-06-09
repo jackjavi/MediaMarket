@@ -1,6 +1,10 @@
+<div align="center">
+  <img src="media-market-logo.png" alt="Media Market Logo" width="200" height="200">
+</div>
+
 # Media Market
 
-Welcome to Media Market! This project is an e-commerce platform for buying and selling media-related products.
+Media Market is an e-commerce platform for buying and selling media-related products.
 
 ## Table of Contents
 
@@ -16,29 +20,43 @@ Welcome to Media Market! This project is an e-commerce platform for buying and s
 
 Media Market is a web application built with Next.js and Node.js that allows users to browse and purchase media products such as books, movies, music, and more. It provides a seamless and user-friendly interface for buyers and sellers to interact and conduct transactions.
 
+<div align="center">
+  <img src="media-market-screenshot.png" alt="Media Market Screenshot" width="800">
+</div>
+
 ## Features
 
 - User registration and authentication
 - Product listing and search functionality
 - Shopping cart management
-- Secure payment integration
-- Order tracking and history
+- Order placement and tracking
 - User reviews and ratings
 
 ## Installation
 
 To get started with Media Market on your local machine, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/jackjavi/media-market.git`
-2. Navigate to the project directory: `cd media-market`
-3. Install the dependencies: `npm install`
+1. Clone the repository:
+git clone https://github.com/jackjavi/media-market.git
+
+2. Navigate to the project directory:
+cd MediaMarket
 
 ## Usage
 
 Once you have installed the dependencies, you can run the project locally:
 
-1. Start the development server: `npm run dev`
-2. Open your browser and visit: `http://localhost:3000`
+1. Start the backend server:
+cd mediamarket-backend
+npm install
+npm start
+
+2. Start the frontend development server:
+cd marketmedia-frontend
+npm install
+npm run dev
+
+3. Open your browser and visit: `http://localhost:3000`
 
 ## Technologies
 
@@ -48,8 +66,7 @@ The key technologies and frameworks used in this project are:
 - Node.js: A JavaScript runtime environment for executing server-side code.
 - Express: A fast and minimalist web application framework for Node.js.
 - MongoDB: A NoSQL database for storing and retrieving data.
-- Paypal: A payment processing platform for handling secure online transactions.
-- Tailwind CSS: A utility-first CSS framework for quickly styling the user interface.
+- Tailwind CSS: A utility-first CSS framework for styling the user interface.
 
 ## Contributing
 
