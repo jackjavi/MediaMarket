@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ProductCategories = () => {
   return (
@@ -7,26 +8,42 @@ const ProductCategories = () => {
       <div className="grid grid-rows-3 gap-4 items-center justify-center">
         {/* Add category cards */}
         <div className="bg-white rounded-md p-4">
-          <h3 className="text-lg text-pink-500 font-semibold">Discover</h3>
-          <p className="text-gray-600">
+          <Link href="/product">
+            <h3 className="text-md 2xl:text-lg cursor-pointer font-lora text-pink-500 font-semibold">
+              Discover
+            </h3>
+          </Link>
+
+          <p className="text-gray-600 text-sm 2xl:text-md">
             Explore products in different Categories
           </p>
         </div>
         <div className="bg-white rounded-md p-4">
-          <h3 className="text-lg text-pink-500 font-semibold">Sell</h3>
-          <p className="text-gray-600">
+          <Link href="/creators">
+            <h3 className="ttext-md 2xl:text-lg cursor-pointer text-pink-500 font-semibold">
+              Sell
+            </h3>
+          </Link>
+
+          <p className="text-gray-600 text-sm 2xl:text-md">
             Create, sell and earn rewards globally
           </p>
         </div>
         <div className="bg-white rounded-md p-4">
-          <h3 className="text-lg text-pink-500 font-semibold">Pricing</h3>
-          <p className="text-gray-600">
+          <h3 className="text-md 2xl:text-lg cursor-pointer text-pink-500 font-semibold">
+            Pricing
+          </h3>
+          <p className="text-gray-600 text-sm 2xl:text-md">
             Checkout our awesome Pricing structure
           </p>
         </div>
         <div className="bg-white rounded-md p-4">
-          <h3 className="text-lg text-pink-500 font-semibold">Blog</h3>
-          <p className="text-gray-600">Start your own blog section here</p>
+          <h3 className="text-md 2xl:text-lg cursor-pointer text-pink-500 font-semibold">
+            Blog
+          </h3>
+          <p className="text-gray-600 text-sm 2xl:text-md">
+            Start your own blog section here
+          </p>
         </div>
       </div>
     </div>
