@@ -5,10 +5,14 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import NavBar from "@/app/creators/components/Navbar";
 import Footer from "@/app/(home)/components/Footer";
+import Link from "next/link";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [buttonText, setButtonText] = useState("Login");
+  const [error, setError] = useState(null); // Add error state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,42 +22,54 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (loading) {
+      setButtonText("Loading...");
+    } else {
+      setButtonText("Login");
+    }
+  }, [loading]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (credentials.password.length < 6) {
-      alert("Password should be at least 6 characters long");
+      setError("Password must be at least 6 characters long"); // Set error message
       return;
     }
 
-    // Perform login logic here
-    const token = localStorage.getItem("token");
-    const url = "https://www.jackjavi.tech/api/v1/auth/login";
+    setLoading(true);
 
-    axios
-      .post(url, credentials, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // Perform success logic here
-        if (response.data.token) {
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-          router.push("/");
-        }
-      })
-      .catch((error) => {
-        console.error("Login failed:", error);
-        // Perform error logic here
-      });
+    try {
+      const res = await axios.post(
+        "https://www.jackjavi.tech/api/v1/auth/login",
+        credentials // Send credentials instead of user
+      );
+
+      if (res.data.token) {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Incorrect email/password combination"); // Set error message
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="container mx-auto">
       <NavBar />
-      <main className="flex justify-center items-center h-[85vh]">
+      <main className="flex flex-col justify-center items-center h-[85vh]">
+        <p className="bg-orange-300 w-full text-center p-2 text-sm lg:text-md">
+          Don't have an account?
+          <Link href="/register">
+            <span className="font-lora ml-2 text-[teal] italic cursor-pointer">
+              Sign Up
+            </span>
+          </Link>
+        </p>
         <form
           className="w-full h-full shadow rounded flex items-center justify-center"
           onSubmit={handleSubmit}
@@ -88,11 +104,14 @@ const Login = () => {
                 required
               />
             </div>
+            {error && <p className="text-red-500 mb-4">{error}</p>}{" "}
+            {/* Display error message */}
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              disabled={loading} // Disable the button when loading
             >
-              Log in
+              {buttonText}
             </button>
           </div>
         </form>
