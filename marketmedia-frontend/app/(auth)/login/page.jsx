@@ -63,7 +63,7 @@ const Login = () => {
       <NavBar />
       <main className="flex flex-col justify-center items-center h-[85vh]">
         <p className="bg-orange-300 w-full text-center p-2 text-sm lg:text-md">
-          Don&apost have an account?
+          Craete an account?
           <Link href="/register">
             <span className="font-lora ml-2 text-[teal] italic cursor-pointer">
               Sign Up
