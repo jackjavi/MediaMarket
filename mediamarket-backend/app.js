@@ -17,7 +17,7 @@ const albumRoute = require("./routes/albumsRoute");
 const audioRoute = require("./routes/audioRoute");
 const app = express();
 
-const port = process.env.port || 8000;
+const port = process.env.PORT || 8000;
 
 // routers
 const authRouter = require("./routes/auth");
