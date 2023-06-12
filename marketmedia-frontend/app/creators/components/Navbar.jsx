@@ -112,13 +112,13 @@ const NavBar = () => {
       </div>
 
       <ul className="hidden md:flex">
-        <Link href={user ? "/product" : "/register"}>
+        <Link href="/product">
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Discover
           </li>
         </Link>
 
-        <Link href={user ? "/dashboard" : "/register"}>
+        <Link href="/dashboard">
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Dashboard
           </li>
@@ -130,7 +130,7 @@ const NavBar = () => {
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Buy
         </li>
-        <Link href={user ? "/creators" : "/register"}>
+        <Link href="/creators">
           <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
             Sell
           </li>
