@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import NavBar from "../creators/components/Navbar";
 import Footer from "../(home)/components/Footer";
 import ProductCategories from "../(home)/components/ProductCategories";
+import UserProducts from "./components/UserProducts";
 import Image from "next/image";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -299,7 +300,7 @@ const Settings = () => {
                 </div>
               </div>
             )}
-            {/*<Post />*/}
+            {/* <UserProducts /> */}
           </div>
           <div className="">
             <ProductCategories />
