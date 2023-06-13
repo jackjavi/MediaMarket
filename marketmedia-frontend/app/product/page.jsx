@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CategoriesComponent from "./components/CategoriesComponent";
 import NavBar from "../creators/components/Navbar";
-import Footer from "../(home)/components/Footer copy";
+import Footer from "../(home)/components/Footer";
 
 const Products = () => {
   const router = useRouter();
