@@ -30,6 +30,10 @@ const getAllProducts = async (req, res) => {
   if (name) {
     queryObject.name = name;
   }
+
+  if (userId) {
+    queryObject.createdBy = userId;
+  }
   const products = await Product.find(queryObject).sort("-createdAt");
   res.status(StatusCodes.OK).json({ products, count: products.length });
 };
