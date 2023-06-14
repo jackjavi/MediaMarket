@@ -33,10 +33,12 @@ const ProductForm = () => {
       const compressedProductFile = await imageCompression(file, options);
       console.log(
         "compressedFile instanceof Blob",
-        compressedFile instanceof Blob
+        compressedProductFile instanceof Blob
       ); // true
       console.log(
-        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        `compressedProductFile size ${
+          compressedProductFile.size / 1024 / 1024
+        } MB`
       ); // smaller than maxSizeM
     } catch (error) {
       console.log(error);
