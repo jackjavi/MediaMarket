@@ -14,7 +14,8 @@ const ProductForm = () => {
   const [images, setImages] = useState(null);
   const [cloudImages, setCloudImages] = useState(null);
   const [videos, setVideos] = useState(null);
-
+  const [prodUrls, SetProdUrl] = useState(null);
+  const [cloudVideos, setCloudVideos] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
