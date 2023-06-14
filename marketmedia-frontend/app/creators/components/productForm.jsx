@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Preview from "./Preview";
-import { router } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FaToggleOff } from "react-icons/fa";
 import { FaToggleOn } from "react-icons/fa";
 
@@ -14,13 +14,13 @@ const ProductForm = () => {
   const [images, setImages] = useState(null);
   const [cloudImages, setCloudImages] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [prodUrls, SetProdUrl] = useState(null);
-  const [cloudVideos, setCloudVideos] = useState(null);
+
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const router = useRouter();
 
   const setProductPrice = () => {
     if (toggle) {
@@ -68,15 +68,11 @@ const ProductForm = () => {
 
     // Send the completeProductWithUrls to the backend
     axios
-      .post(
-        "https://www.jackjavi.tech/api/v1/products",
-        completeProductWithUrls,
-        {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(token)}`,
-          },
-        }
-      )
+      .post("http://localhost:8000/api/v1/products", completeProductWithUrls, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
       .then((response) => {
         // Handle the response from the backend
         console.log("Product sent successfully:", response.data);
@@ -115,6 +111,7 @@ const ProductForm = () => {
           }
         );
         if (imageResponse.data) {
+          alert("ok");
           const imageUrls = imageResponse.data.map((image) => image.url); // Extract the URLs from the response data
           // Store imageUrls in localStorage
           localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
@@ -138,6 +135,7 @@ const ProductForm = () => {
               }
             );
             if (videoResponse.data) {
+              alert("yes");
               const productUrls = videoResponse.data.map((file) => file.url); // Extract the URLs from the response data
               // Store imageUrls in localStorage
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
@@ -160,19 +158,17 @@ const ProductForm = () => {
   useEffect(() => {
     const handleScroll = () => {
       const form = document.getElementById("product-form");
-      const formRect = form.getBoundingClientRect();
-      const topDistance = formRect.top;
 
-      if (topDistance <= 0) {
-        setShowPreview(true);
-      } else {
-        setShowPreview(false);
+      if (form) {
+        const formRect = form.getBoundingClientRect();
+        const topDistance = formRect.top;
+
+        if (topDistance <= 0) {
+          setShowPreview(true);
+        } else {
+          setShowPreview(false);
+        }
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
