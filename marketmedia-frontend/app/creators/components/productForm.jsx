@@ -6,28 +6,69 @@ import Preview from "./Preview";
 import { useRouter } from "next/navigation";
 import { FaToggleOff } from "react-icons/fa";
 import { FaToggleOn } from "react-icons/fa";
+import imageCompression from "browser-image-compression";
 
 const ProductForm = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState(null);
-  const [cloudImages, setCloudImages] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [prodUrls, SetProdUrl] = useState(null);
-  const [cloudVideos, setCloudVideos] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [product, setProduct] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const router = useRouter();
 
+  const compressProductFile = async (file) => {
+    // Compress the image
+    console.log("originalFile instanceof Blob", file instanceof Blob); // true
+    console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
+    const options = {
+      maxSizeMB: 20,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    try {
+      const compressedProductFile = await imageCompression(file, options);
+      console.log(
+        "compressedFile instanceof Blob",
+        compressedFile instanceof Blob
+      ); // true
+      console.log(
+        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      ); // smaller than maxSizeM
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const compressImage = async (image) => {
+    // Compress the image
+    console.log("originalFile instanceof Blob", image instanceof Blob); // true
+    console.log(`originalFile size ${image.size / 1024 / 1024} MB`);
+    const options = {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    try {
+      const compressedFile = await imageCompression(image, options);
+      console.log(
+        "compressedFile instanceof Blob",
+        compressedFile instanceof Blob
+      ); // true
+      console.log(
+        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      ); // smaller than maxSizeM
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const setProductPrice = () => {
     if (toggle) {
       setPrice("0");
-    } else {
-      setPrice("");
     }
   };
 
@@ -54,7 +95,6 @@ const ProductForm = () => {
     const storedProductUrls = localStorage.getItem("fileUrls");
     if (storedProductUrls) {
       parsedProductUrls = JSON.parse(storedProductUrls);
-      SetProdUrl(parsedProductUrls);
     }
 
     let completeProductWithUrls = {
@@ -65,7 +105,6 @@ const ProductForm = () => {
       videos: parsedProductUrls ? parsedProductUrls : videos,
       categories: selectedCategories,
     };
-    setProduct(completeProductWithUrls);
 
     // Send the completeProductWithUrls to the backend
     axios
@@ -99,6 +138,7 @@ const ProductForm = () => {
       // Append images
       if (images) {
         images.forEach((image) => {
+          compressImage(image);
           formData.append("files", image);
         });
         const imageResponse = await axios.post(
@@ -112,7 +152,6 @@ const ProductForm = () => {
           }
         );
         if (imageResponse.data) {
-          alert("ok");
           const imageUrls = imageResponse.data.map((image) => image.url); // Extract the URLs from the response data
           // Store imageUrls in localStorage
           localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
@@ -122,6 +161,7 @@ const ProductForm = () => {
           // Append videos
           if (videos) {
             videos.forEach((productFile) => {
+              compressProductFile(productFile);
               formData.append("files", productFile);
             });
 
@@ -136,7 +176,6 @@ const ProductForm = () => {
               }
             );
             if (videoResponse.data) {
-              alert("yes");
               const productUrls = videoResponse.data.map((file) => file.url); // Extract the URLs from the response data
               // Store imageUrls in localStorage
               localStorage.setItem("fileUrls", JSON.stringify(productUrls));
