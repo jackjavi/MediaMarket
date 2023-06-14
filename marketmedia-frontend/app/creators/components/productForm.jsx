@@ -92,7 +92,6 @@ const ProductForm = () => {
     const storedImageUrls = localStorage.getItem("imageUrls");
     if (storedImageUrls) {
       parsedImageUrls = JSON.parse(storedImageUrls);
-      setCloudImages(parsedImageUrls);
     }
     const storedProductUrls = localStorage.getItem("fileUrls");
     if (storedProductUrls) {
