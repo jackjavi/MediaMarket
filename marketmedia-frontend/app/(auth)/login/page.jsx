@@ -48,6 +48,7 @@ const Login = () => {
 
       if (res.data.token) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         router.push("/");
       }
     } catch (err) {

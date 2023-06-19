@@ -5,11 +5,13 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("token"));
@@ -30,10 +32,20 @@ const NavBar = () => {
     console.log(user);
   }
 
+  const handleRoute = (link) => {
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
+    if (parsedUser && parsedUser.profileImage) {
+      router.push(link);
+    } else {
+      router.push("/register");
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setLoggedIn(false);
+    router.push("/");
     // Additional logout logic if needed
   };
 
@@ -112,17 +124,12 @@ const NavBar = () => {
       </div>
 
       <ul className="hidden md:flex">
-        <Link href={user ? "/product" : "/register"}>
-          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-            Discover
-          </li>
-        </Link>
-
-        <Link href={user ? "/dashboard" : "/register"}>
-          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
-            Dashboard
-          </li>
-        </Link>
+        <li
+          onClick={() => handleRoute("/product")}
+          className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+        >
+          Discover
+        </li>
 
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Blog
@@ -131,7 +138,10 @@ const NavBar = () => {
           Buy
         </li>
         <Link href="/creators">
-          <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+          <li
+            onClick={() => handleRoute("/creators")}
+            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+          >
             Sell
           </li>
         </Link>
