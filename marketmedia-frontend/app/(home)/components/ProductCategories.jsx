@@ -8,7 +8,7 @@ const ProductCategories = () => {
       <div className="grid grid-rows-3 gap-4 items-center justify-center">
         {/* Add category cards */}
         <div className="bg-white rounded-md p-4">
-          <Link href="/product">
+          <Link href={user ? "/product" : "/register"}>
             <h3 className="text-md 2xl:text-lg cursor-pointer font-lora text-pink-500 font-semibold">
               Discover
             </h3>
@@ -19,7 +19,7 @@ const ProductCategories = () => {
           </p>
         </div>
         <div className="bg-white rounded-md p-4">
-          <Link href="/creators">
+          <Link href={user ? "/creators" : "/register"}>
             <h3 className="ttext-md 2xl:text-lg cursor-pointer text-pink-500 font-semibold">
               Sell
             </h3>
