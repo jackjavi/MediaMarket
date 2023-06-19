@@ -45,6 +45,7 @@ const NavBar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setLoggedIn(false);
+    router.refresh();
     router.push("/");
     // Additional logout logic if needed
   };
@@ -137,14 +138,13 @@ const NavBar = () => {
         <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
           Buy
         </li>
-        <Link href="/creators">
-          <li
-            onClick={() => handleRoute("/creators")}
-            className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
-          >
-            Sell
-          </li>
-        </Link>
+
+        <li
+          onClick={() => handleRoute("/creators")}
+          className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+        >
+          Sell
+        </li>
       </ul>
 
       <ul className="hidden md:flex items-center">
