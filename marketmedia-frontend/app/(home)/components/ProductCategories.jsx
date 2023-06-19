@@ -1,7 +1,18 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
+import React, { useState, useEffect } from "react";
 
 const ProductCategories = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (parsedUser) {
+      setUser(user);
+    }
+  }, []);
   return (
     <div className="bg-purple-400 rounded-md p-4 hidden h-[85vh] md:flex md:flex-col md:gap-2 justify-around ">
       <h2 className="text-xl  font-bold mb-2">Digital Media Products</h2>
