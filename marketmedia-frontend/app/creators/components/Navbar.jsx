@@ -13,6 +13,10 @@ const NavBar = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
+  const handleClick = () => {
+    setLoggedIn(true);
+  };
+
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("token"));
     const parsedUser = JSON.parse(localStorage.getItem("user"));
@@ -26,7 +30,7 @@ const NavBar = () => {
     if (parsedUser && parsedUser.profileImage) {
       setUser(parsedUser.profileImage);
     }
-  }, []);
+  }, [loggedIn]);
 
   if (user && user.length > 0) {
     console.log(user);
@@ -175,7 +179,10 @@ const NavBar = () => {
         ) : (
           <>
             <Link href="/login">
-              <li className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200">
+              <li
+                onClick={handleClick}
+                className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-105 duration-200"
+              >
                 Login
               </li>
             </Link>
